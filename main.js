@@ -305,6 +305,9 @@ function renderAlbums(albums) {
         div.style.transitionDelay = `${(idx + 1) * 0.05}s`;
         div.style.display = 'block';
 
+        const isLigue2 = album.category.toUpperCase().includes('LIGUE 2');
+        const specialBadge = isLigue2 ? `<div class="badge-l2" style="position: absolute; top: 20px; right: 20px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1px;">PRO : LIGUE 2</div>` : '';
+
         // Generate ID for link: favor album.id, fallback to slugified title
         const slugify = text => text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
         const linkId = album.id || slugify(album.title);
@@ -345,6 +348,7 @@ function renderAlbums(albums) {
         }
 
         div.innerHTML = `
+            ${specialBadge}
             ${imgTag}
             <div class="card-overlay">
                 <span class="card-cat">${album.category}</span>
