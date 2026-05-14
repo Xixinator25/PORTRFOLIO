@@ -1868,6 +1868,10 @@ body.fast-load .hero .btn {
         background: #DAA520;
     }
 
+    .row-l2::before {
+        background: #00aaff;
+    }
+
     .row-nat::before {
         background: var(--primary);
     }
@@ -1917,8 +1921,8 @@ body.fast-load .hero .btn {
     .club-bubble img {
         max-width: 100%;
         max-height: 100%;
-        filter: grayscale(100%) brightness(0.8);
-        opacity: 0.7;
+        filter: grayscale(30%);
+        opacity: 0.9;
         transition: 0.3s;
     }
 
