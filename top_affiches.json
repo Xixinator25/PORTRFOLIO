@@ -1,0 +1,56 @@
+[
+  {
+    "date": "JAN 2026",
+    "homeTeam": "FCSM",
+    "awayTeam": "RC LENS",
+    "homeLogo": "images/logos/fcsm.png",
+    "awayLogo": "images/logos/rclens.png",
+    "competition": "Coupe De France",
+    "badgeClass": "bg-cup"
+  },
+  {
+    "date": "NOV 2025",
+    "homeTeam": "FCSM",
+    "awayTeam": "VERSAILLES",
+    "homeLogo": "images/logos/fcsm.png",
+    "awayLogo": "images/logos/Logo_FC_Versailles.png",
+    "competition": "National 1",
+    "badgeClass": "bg-n1"
+  },
+  {
+    "date": "NOV 25",
+    "homeTeam": "FCSM",
+    "awayTeam": "DFCO",
+    "homeLogo": "images/logos/fcsm.png",
+    "awayLogo": "images/logos/dfco.png",
+    "competition": "National 1",
+    "badgeClass": "bg-n1"
+  },
+  {
+    "date": "FEV 2026",
+    "homeTeam": "FCSM",
+    "awayTeam": "FC ROUEN",
+    "homeLogo": "images/logos/fcsm.png",
+    "awayLogo": "images/logos/Logo_FC_Rouen.png",
+    "competition": "National 1",
+    "badgeClass": "bg-n1"
+  },
+  {
+    "date": "SEP 2025",
+    "homeTeam": "FCSM",
+    "awayTeam": "SM CAEN",
+    "homeLogo": "images/logos/fcsm.png",
+    "awayLogo": "images/logos/smcaen.png",
+    "competition": "National 1",
+    "badgeClass": "bg-n1"
+  },
+  {
+    "date": "MAI 2025",
+    "homeTeam": "FCSM U19",
+    "awayTeam": "PSG U19",
+    "homeLogo": "images/logos/fcsm.png",
+    "awayLogo": "images/logos/psg.png",
+    "competition": "Playoffs U19",
+    "badgeClass": "bg-u19"
+  }
+]

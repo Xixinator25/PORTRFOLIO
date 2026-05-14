@@ -1,0 +1,59 @@
+{
+  "competitionDistribution": {
+    "labels": [
+      "National 1",
+      "National 3",
+      "Coupe de France",
+      "U19 / Autres"
+    ],
+    "values": [
+      14,
+      7,
+      5,
+      12
+    ]
+  },
+  "seasonEvolution": {
+    "labels": [
+      "Août",
+      "Sept",
+      "Oct",
+      "Nov",
+      "Déc",
+      "Jan",
+      "Fév",
+      "Mars",
+      "Avr",
+      "Mai"
+    ],
+    "values": [
+      1,
+      3,
+      2,
+      4,
+      0,
+      3,
+      3,
+      5,
+      5,
+      6
+    ]
+  },
+  "photoTypes": {
+    "labels": [
+      "Action de jeu",
+      "Portraits joueurs",
+      "Ambiance",
+      "Célébrations"
+    ],
+    "values": [
+      60,
+      20,
+      10,
+      10
+    ]
+  },
+  "status": {
+    "available": true
+  }
+}

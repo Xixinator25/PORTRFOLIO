@@ -1,0 +1,37 @@
+{
+    "recentMatches": [
+        {
+            "id": 1772740176306,
+            "homeTeam": "FCSM",
+            "awayTeam": "FCVB",
+            "date": "2026-02-27",
+            "competition": "NATIONAL 1",
+            "competitionBadge": "badge-n1",
+            "homeLogo": "images/logos/fcsm.png",
+            "awayLogo": "images/logos/Logo_FCVB.png",
+            "albumId": "2026-03-05_fcsm-vs-fcvb"
+        },
+        {
+            "id": 1772740176307,
+            "homeTeam": "FCSM",
+            "awayTeam": "FC ROUEN",
+            "date": "2026-01-30",
+            "competition": "NATIONAL 1",
+            "competitionBadge": "badge-n1",
+            "homeLogo": "images/logos/fcsm.png",
+            "awayLogo": "images/logos/Logo_FC_Rouen.png",
+            "albumId": "2026-03-04_fcsm-vs-fcvb"
+        },
+        {
+            "id": 1772740176308,
+            "homeTeam": "FCSM",
+            "awayTeam": "LB CHATEAUROUX",
+            "date": "2026-01-16",
+            "competition": "NATIONAL 1",
+            "competitionBadge": "badge-n1",
+            "homeLogo": "images/logos/fcsm.png",
+            "awayLogo": "images/logos/LBChateauroux.png",
+            "albumId": "2026-01-16_n1_fcsm_vs_lb_chateauroux"
+        }
+    ]
+}

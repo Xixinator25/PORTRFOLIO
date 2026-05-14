@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shooted-by-alexis.vercel.app/sitemap.xml

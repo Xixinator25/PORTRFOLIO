@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Oswald:wght@300;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="../favicon.png" type="image/png">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">PORTFOLIO <span>ADMIN</span></div>
+        <div class="header-actions">
+            <button id="restore-backup-btn" class="btn btn-danger"><i class="fas fa-undo"></i> Restaurer
+                Version</button>
+            <button id="save-all-btn" class="btn btn-blue"><i class="fas fa-save"></i> Sauvegarder</button>
+            <button id="optimize-btn" class="btn btn-warning"><i class="fas fa-image"></i> Optimiser Images</button>
+            <button id="deploy-btn" class="btn btn-success"><i class="fas fa-rocket"></i> Déployer</button>
+        </div>
+    </header>
+
+    <!-- Status Overlay -->
+    <div id="status-overlay" class="status-overlay" style="display: none;">
+        <div class="status-content">
+            <div class="status-spinner"></div>
+            <h3 id="status-title">En cours...</h3>
+            <p id="status-message">Veuillez patienter</p>
+            <div id="status-log" class="status-log"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="albums">Albums</button>
+            <button class="tab-btn" data-tab="matches">Matchs Récents</button>
+            <button class="tab-btn" data-tab="stats">Statistiques</button>
+            <button class="tab-btn" data-tab="affiches">Top Affiches</button>
+            <button class="tab-btn" data-tab="agenda">Agenda</button>
+            <button class="tab-btn" data-tab="instagram">Instagram</button>
+            <button class="tab-btn" data-tab="clubs">Clubs & Terrains</button>
+        </div>
+
+        <div id="albums-tab" class="tab-content active">
+            <div class="toolbar">
+                <h2>Albums</h2>
+                <button id="add-album-btn" class="btn btn-outline"><i class="fas fa-plus"></i> Nouvel Album</button>
+            </div>
+
+            <div id="albums-list" class="albums-grid">
+                <!-- Albums will be injected here -->
+            </div>
+        </div>
+
+        <div id="matches-tab" class="tab-content">
+            <div class="toolbar">
+                <h2>Matchs Récents</h2>
+                <div>
+                    <button id="sync-matches-btn" class="btn btn-warning" style="margin-right: 10px;"><i
+                            class="fas fa-sync"></i> Synchroniser Albums</button>
+                    <button id="add-match-btn" class="btn btn-outline"><i class="fas fa-plus"></i> Nouveau
+                        Match</button>
+                </div>
+            </div>
+
+            <div id="matches-list" class="matches-grid">
+                <!-- Matches will be injected here -->
+            </div>
+        </div>
+
+        <div id="stats-tab" class="tab-content">
+            <div class="toolbar">
+                <h2>Données des Graphiques</h2>
+                <button id="save-stats-btn" class="btn btn-success"><i class="fas fa-save"></i> Sauvegarder
+                    Stats</button>
+            </div>
+
+            <!-- Competition Distribution -->
+            <div class="stats-editor-section">
+                <h3><i class="fas fa-chart-bar"></i> Répartition par Compétition</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>National 1</label>
+                        <input type="number" id="comp-n1" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>National 3</label>
+                        <input type="number" id="comp-n3" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Coupe de France</label>
+                        <input type="number" id="comp-cup" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>U19 / Autres</label>
+                        <input type="number" id="comp-other" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Season Evolution -->
+            <div class="stats-editor-section">
+                <h3><i class="fas fa-chart-line"></i> Évolution Saison 2025-2026</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Août</label>
+                        <input type="number" id="month-aug" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Septembre</label>
+                        <input type="number" id="month-sep" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Octobre</label>
+                        <input type="number" id="month-oct" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Novembre</label>
+                        <input type="number" id="month-nov" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Décembre</label>
+                        <input type="number" id="month-dec" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Janvier</label>
+                        <input type="number" id="month-jan" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Février</label>
+                        <input type="number" id="month-feb" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Mars</label>
+                        <input type="number" id="month-mar" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Avril</label>
+                        <input type="number" id="month-apr" min="0" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Mai</label>
+                        <input type="number" id="month-may" min="0" value="0">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo Types -->
+            <div class="stats-editor-section">
+                <h3><i class="fas fa-chart-pie"></i> Types de Photos (%)</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Action de jeu (%)</label>
+                        <input type="number" id="type-action" min="0" max="100" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Portraits joueurs (%)</label>
+                        <input type="number" id="type-portraits" min="0" max="100" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Ambiance (%)</label>
+                        <input type="number" id="type-ambiance" min="0" max="100" value="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Célébrations (%)</label>
+                        <input type="number" id="type-celebrations" min="0" max="100" value="0">
+                    </div>
+                </div>
+                <small style="color: #888; margin-top: 1rem; display: block;">⚠️ Le total doit égaler 100%</small>
+            </div>
+
+            <!-- Global Settings (Availability) -->
+            <div class="stats-editor-section">
+                <h3><i class="fas fa-calendar-check"></i> Statut & Disponibilité</h3>
+                <div class="form-group" style="max-width: 300px;">
+                    <label>Disponibilité Contact</label>
+                    <select id="status-available"
+                        style="width: 100%; padding: 10px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; border-radius: 4px;">
+                        <option value="true">🟢 Disponible (Affichera 'Dispo')</option>
+                        <option value="false">🔴 Indisponible (Affichera 'Complet')</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Top Affiches Tab -->
+    <div id="affiches-tab" class="tab-content">
+        <div class="toolbar">
+            <h2>Top Affiches</h2>
+            <button id="add-affiche-btn" class="btn btn-outline"><i class="fas fa-plus"></i> Nouvelle Affiche</button>
+        </div>
+        <div id="affiches-list" class="albums-grid"></div>
+    </div>
+
+    <!-- Agenda Tab -->
+    <div id="agenda-tab" class="tab-content">
+        <div class="toolbar">
+            <h2>Agenda Matchs</h2>
+            <div style="display:flex; gap:10px;">
+                <button id="add-agenda-btn" class="btn btn-outline"><i class="fas fa-plus"></i> Nouveau Match</button>
+                <button id="export-gcal-btn" class="btn btn-warning"><i class="fas fa-calendar-plus"></i> Exporter
+                    Google Calendar</button>
+                <button id="import-gcal-btn" class="btn btn-warning"><i class="fas fa-calendar-alt"></i> Importer Google
+                    Agenda</button>
+            </div>
+        </div>
+        <div id="agenda-list" style="margin-top:1rem;"></div>
+    </div>
+
+    <!-- Instagram Tab -->
+    <div id="instagram-tab" class="tab-content">
+        <div class="toolbar">
+            <h2>Posts Instagram</h2>
+            <button id="add-insta-btn" class="btn btn-outline"><i class="fas fa-plus"></i> Nouveau Post</button>
+        </div>
+        <div id="insta-list" class="albums-grid"></div>
+    </div>
+
+    <!-- Clubs & Terrains Tab -->
+    <div id="clubs-tab" class="tab-content">
+        <div class="toolbar">
+            <h2>Clubs & Terrains</h2>
+        </div>
+        <div id="clubs-list" style="margin-top:1rem;"></div>
+    </div>
+
+    <!-- Affiche Modal -->
+    <div id="affiche-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-affiche-modal" style="cursor:pointer; float:right; font-size:2rem;">&times;</span>
+            <h2 id="affiche-modal-title">Nouvelle Affiche</h2>
+            <form id="affiche-form">
+                <div class="form-group">
+                    <label>Date affichée (ex: JAN 2026)</label>
+                    <input type="text" id="affiche-date" required>
+                </div>
+                <div class="form-group">
+                    <label>Équipe Domicile</label>
+                    <input type="text" id="affiche-home" required>
+                </div>
+                <div class="form-group">
+                    <label>Équipe Extérieur</label>
+                    <input type="text" id="affiche-away" required>
+                </div>
+                <div class="form-group">
+                    <label>Logo Domicile (chemin)</label>
+                    <input type="text" id="affiche-home-logo" value="images/logos/fcsm.png" required>
+                </div>
+                <div class="form-group">
+                    <label>Logo Extérieur (chemin)</label>
+                    <input type="text" id="affiche-away-logo" required>
+                </div>
+                <div class="form-group">
+                    <label>Compétition</label>
+                    <input type="text" id="affiche-competition" required>
+                </div>
+                <div class="form-group">
+                    <label>Badge CSS</label>
+                    <select id="affiche-badge">
+                        <option value="bg-n1">National 1</option>
+                        <option value="bg-n3">National 3</option>
+                        <option value="bg-cup">Coupe</option>
+                        <option value="bg-u19">U19</option>
+                        <option value="bg-reg">Régional</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="delete-affiche-btn" class="btn btn-danger"
+                        style="display:none;">Supprimer</button>
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Agenda Modal -->
+    <div id="agenda-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-agenda-modal" style="cursor:pointer; float:right; font-size:2rem;">&times;</span>
+            <h2 id="agenda-modal-title">Nouveau Match</h2>
+            <form id="agenda-form">
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="agenda-date" required>
+                </div>
+                <div class="form-group">
+                    <label>Heure</label>
+                    <input type="time" id="agenda-time">
+                </div>
+                <div class="form-group">
+                    <label>Équipe Domicile</label>
+                    <input type="text" id="agenda-home" required>
+                </div>
+                <div class="form-group">
+                    <label>Équipe Extérieur</label>
+                    <input type="text" id="agenda-away" required>
+                </div>
+                <div class="form-group">
+                    <label>Compétition</label>
+                    <input type="text" id="agenda-competition" required>
+                </div>
+                <div class="form-group">
+                    <label>Lieu</label>
+                    <input type="text" id="agenda-venue">
+                </div>
+                <div class="form-group">
+                    <label>Type</label>
+                    <select id="agenda-type">
+                        <option value="pro">Pro / National</option>
+                        <option value="amateur">Amateur / Régional</option>
+                        <option value="coupe">Coupe</option>
+                        <option value="jeunes">Jeunes / U19</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Notes</label>
+                    <textarea id="agenda-notes" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label style="display:flex; align-items:center; gap:8px;">
+                        <input type="checkbox" id="agenda-photographed"> Photographié
+                    </label>
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="delete-agenda-btn" class="btn btn-danger"
+                        style="display:none;">Supprimer</button>
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="modal-title">Modifier l'Album</h2>
+
+            <form id="album-form">
+                <input type="hidden" id="album-index">
+
+                <div class="form-group">
+                    <label>Titre</label>
+                    <input type="text" id="album-title" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Catégorie</label>
+                    <input type="text" id="album-category" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Dossier source (Scan automatique)</label>
+                    <div style="display:flex; gap: 10px;">
+                        <select id="album-folder"
+                            style="flex:1; padding: 0.8rem; background: var(--bg-dark); border: 1px solid var(--border-color); color: #fff; border-radius: 8px;">
+                            <option value="">Sélectionner un dossier...</option>
+                        </select>
+                        <button type="button" id="scan-folder-btn" class="btn btn-warning"><i class="fas fa-search"></i>
+                            Scanner</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Image de couverture (Chemin relatif)</label>
+                    <div style="display:flex; gap: 10px;">
+                        <input type="text" id="album-cover" style="flex:1;" required>
+                        <button type="button" id="set-cover-btn" class="btn btn-outline"
+                            title="Utiliser la première image scannée comme couverture">1ère Image</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Photos (Liste générée / 1 par ligne)</label>
+                    <textarea id="album-images" rows="10"></textarea>
+                    <small>Cliquez sur "Scanner" ou entrez les chemins manuellement</small>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" id="delete-album-btn" class="btn btn-danger">Supprimer l'album</button>
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Match Modal -->
+    <div id="match-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-match-modal">&times;</span>
+            <h2 id="match-modal-title">Ajouter un Match</h2>
+
+            <form id="match-form">
+                <input type="hidden" id="match-index">
+
+                <div class="form-group">
+                    <label>Équipe Domicile</label>
+                    <input type="text" id="match-home-team" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Équipe Extérieur</label>
+                    <input type="text" id="match-away-team" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="match-date" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Compétition</label>
+                    <select id="match-competition" required>
+                        <option value="">Sélectionner...</option>
+                        <option value="National 1">National 1</option>
+                        <option value="National 3">National 3</option>
+                        <option value="Coupe de France">Coupe de France</option>
+                        <option value="U19 National">U19 National</option>
+                        <option value="Régional">Régional</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Badge Compétition</label>
+                    <select id="match-badge" required>
+                        <option value="">Sélectionner...</option>
+                        <option value="badge-n1">National 1 (badge-n1)</option>
+                        <option value="badge-n3">National 3 (badge-n3)</option>
+                        <option value="badge-cup">Coupe (badge-cup)</option>
+                        <option value="badge-u19">U19 (badge-u19)</option>
+                        <option value="badge">Régional (badge)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Logo Domicile (Chemin)</label>
+                    <input type="text" id="match-home-logo" placeholder="images/logos/fcsm.png" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Logo Extérieur (Chemin)</label>
+                    <input type="text" id="match-away-logo" placeholder="images/logos/rclens.png" required>
+                </div>
+
+                <div class="form-group">
+                    <label>ID Album (optionnel)</label>
+                    <input type="text" id="match-album-id" placeholder="coupe-fcsm-lens">
+                    <small>Lien vers l'album photo correspondant</small>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" id="delete-match-btn" class="btn btn-danger">Supprimer le match</button>
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

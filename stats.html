@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Données & Statistiques | Shooted by Alexis</title>
+    <meta name="description" content="Découvrez les statistiques de performance d'Alexis Sartoris : accréditations National 1, couverture de matchs de football et impact numérique.">
+    <link rel="canonical" href="https://shooted-by-alexis.vercel.app/stats.html">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Oswald:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=5">
+    <link rel="icon" href="favicon.png" type="image/png">
+</head>
+
+<body>
+
+    <div id="cursor-glow"></div>
+
+    <div id="match-modal" onclick="closeMatchModal(event)">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Top Affiches</h3>
+                <span class="close-modal" onclick="closeMatchModal(event)">&times;</span>
+            </div>
+            <div class="match-list" id="top-affiches-list">
+                <!-- Loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load top affiches dynamically
+        (async function loadTopAffiches() {
+            try {
+                const res = await fetch('/top_affiches.json?v=' + Date.now());
+                const affiches = await res.json();
+                const container = document.getElementById('top-affiches-list');
+                container.innerHTML = affiches.map(a => `
+                <div class="match-row">
+                    <span class="m-date">${a.date}</span>
+                    <div class="m-affiche-container">
+                        <img src="${a.homeLogo}" class="club-logo-mini" alt="${a.homeTeam}">
+                        <span class="m-versus">${a.homeTeam} <span>vs</span> ${a.awayTeam}</span>
+                        <img src="${a.awayLogo}" class="club-logo-mini" alt="${a.awayTeam}">
+                    </div>
+                    <span class="m-badge ${a.badgeClass}">${a.competition}</span>
+                </div>
+            `).join('');
+            } catch (e) {
+                console.warn('Top affiches loading error', e);
+            }
+        })();
+    </script>
+
+    <header>
+        <div class="brand"><a href="index.html"
+                style="text-decoration: none; color: inherit;">SHOOTED.BY.<span>ALEXIS</span></a></div>
+        <a href="index.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+    </header>
+
+    <div class="dashboard-container">
+
+        <div class="page-header reveal">
+            <div class="data-mono">Dossier de Performance & Accréditation</div>
+            <h1 class="page-title">
+                <span class="title-primary">STATISTIQUES</span> <span
+                    style="font-size: 0.5em; vertical-align: middle;">&</span><br>
+                <span class="title-white">DONNÉES CLUBS</span>
+            </h1>
+            <p class="page-subtitle">Dossier technique et couverture terrain. Données factuelles pour les services
+                communication et presse.</p>
+        </div>
+
+        <!-- Sommaire -->
+        <div class="reveal delay-1"
+            style="margin: 3rem 0 2rem; padding: 1.5rem 2rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;">
+            <h3
+                style="font-family:'Oswald',sans-serif; text-transform:uppercase; font-size:1rem; color:var(--primary); margin-bottom:1rem; letter-spacing:2px;">
+                <i class="fa-solid fa-bars" style="margin-right:8px;"></i>SOMMAIRE
+            </h3>
+            <div style="display:flex; flex-wrap:wrap; gap:0.8rem;">
+                <a href="#section-kpi"
+                    style="color:#ccc; text-decoration:none; padding:0.5rem 1rem; background:rgba(255,255,255,0.05); border-radius:8px; font-size:0.85rem; transition:0.3s;"
+                    onmouseover="this.style.background='rgba(233,69,96,0.15)';this.style.color='#fff'"
+                    onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.color='#ccc'"><i
+                        class="fa-solid fa-chart-simple" style="margin-right:6px; color:var(--primary);"></i>Chiffres
+                    Clés</a>
+                <a href="#section-accreditations"
+                    style="color:#ccc; text-decoration:none; padding:0.5rem 1rem; background:rgba(255,255,255,0.05); border-radius:8px; font-size:0.85rem; transition:0.3s;"
+                    onmouseover="this.style.background='rgba(233,69,96,0.15)';this.style.color='#fff'"
+                    onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.color='#ccc'"><i
+                        class="fa-solid fa-id-card"
+                        style="margin-right:6px; color:var(--primary);"></i>Accréditations</a>
+                <a href="#section-dataviz"
+                    style="color:#ccc; text-decoration:none; padding:0.5rem 1rem; background:rgba(255,255,255,0.05); border-radius:8px; font-size:0.85rem; transition:0.3s;"
+                    onmouseover="this.style.background='rgba(233,69,96,0.15)';this.style.color='#fff'"
+                    onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.color='#ccc'"><i
+                        class="fa-solid fa-chart-pie" style="margin-right:6px; color:var(--primary);"></i>Visualisation
+                    Données</a>
+                <a href="#section-workflow"
+                    style="color:#ccc; text-decoration:none; padding:0.5rem 1rem; background:rgba(255,255,255,0.05); border-radius:8px; font-size:0.85rem; transition:0.3s;"
+                    onmouseover="this.style.background='rgba(233,69,96,0.15)';this.style.color='#fff'"
+                    onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.color='#ccc'"><i
+                        class="fa-solid fa-camera" style="margin-right:6px; color:var(--primary);"></i>Workflow &
+                    Impact</a>
+                <a href="#section-clubs"
+                    style="color:#ccc; text-decoration:none; padding:0.5rem 1rem; background:rgba(255,255,255,0.05); border-radius:8px; font-size:0.85rem; transition:0.3s;"
+                    onmouseover="this.style.background='rgba(233,69,96,0.15)';this.style.color='#fff'"
+                    onmouseout="this.style.background='rgba(255,255,255,0.05)';this.style.color='#ccc'"><i
+                        class="fa-solid fa-shield-halved" style="margin-right:6px; color:var(--primary);"></i>Clubs &
+                    Terrains</a>
+            </div>
+        </div>
+
+        <div id="section-kpi" style="scroll-margin-top:120px;" class="kpi-grid">
+
+            <div class="photo-card tilt-card reveal delay-1">
+                <div
+                    style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; background:linear-gradient(45deg, #111, #1a1a1a); transition:0.5s;">
+                    <i class="fa-solid fa-cake-candles" style="font-size:3rem; color:rgba(233,69,96,0.25);"></i>
+                </div>
+                <div class="card-overlay" style="opacity:1; transform:translateY(0);">
+                    <span class="card-cat">NÉ EN 2009</span>
+                    <div class="card-title">16 ANS</div>
+                    <small class="card-count">Lycéen en Première Générale</small>
+                </div>
+            </div>
+
+            <div class="photo-card tilt-card reveal delay-2">
+                <div
+                    style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; background:linear-gradient(45deg, #111, #1a1a1a);">
+                    <i class="fa-solid fa-camera" style="font-size:3rem; color:rgba(233,69,96,0.25);"></i>
+                </div>
+                <div class="card-overlay" style="opacity:1; transform:translateY(0);">
+                    <span class="card-cat">DEPUIS 2024</span>
+                    <div class="card-title">2 ANS</div>
+                    <small class="card-count">Expérience Terrain & Progression</small>
+                </div>
+            </div>
+
+            <div class="photo-card tilt-card reveal delay-3" onclick="openMatchModal()" style="cursor:pointer;">
+                <div
+                    style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; background:linear-gradient(45deg, #111, #1a1a1a);">
+                    <i class="fa-regular fa-futbol" style="font-size:3rem; color:rgba(233,69,96,0.25);"></i>
+                </div>
+                <div class="card-overlay" style="opacity:1; transform:translateY(0); padding-bottom:1.5rem;">
+                    <span class="card-cat">OFFICIELS</span>
+                    <div class="card-title" id="total-matches-card" style="margin-bottom: 15px;">29 MATCHS</div>
+                    <a class="btn btn-primary"
+                        style="padding: 0.8rem 1.5rem; font-size: 0.8rem; letter-spacing: 1px; width:100%; display:block; text-align:center; cursor: pointer;">
+                        <i class="fa-solid fa-list-ul" style="margin-right:8px;"></i> TOP AFFICHES
+                    </a>
+                </div>
+            </div>
+
+            <div class="photo-card tilt-card reveal delay-1">
+                <div
+                    style="width:100%; height:100%; display:flex; justify-content:center; align-items:center; background:linear-gradient(45deg, #111, #1a1a1a);">
+                    <i class="fa-solid fa-images" style="font-size:3rem; color:rgba(233,69,96,0.25);"></i>
+                </div>
+                <div class="card-overlay" style="opacity:1; transform:translateY(0);">
+                    <span class="card-cat">RAPIDITÉ</span>
+                    <div class="card-title">3-7 JOURS</div>
+                    <small class="card-count">Livraison Rapide & Qualité</small>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="season-container reveal delay-2">
+            <div class="season-header">
+                <span class="season-title">COUVERTURE SAISON 2025-2026 <span style="color:var(--primary)">EN
+                        COURS</span></span>
+                <span class="season-val" id="season-percent-text">0%</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="season-bar"></div>
+            </div>
+            <div class="season-dates">
+                <span><i class="fa-regular fa-calendar"></i> Août (Début)</span>
+                <span>Mai (Fin) <i class="fa-solid fa-flag-checkered"></i></span>
+            </div>
+        </div>
+
+        <h2 id="section-accreditations" style="scroll-margin-top:120px;" class="section-title reveal">HISTORIQUE DES
+            ACCRÉDITATIONS</h2>
+        <div class="data-table-wrapper reveal delay-1">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Niveau</th>
+                        <th>Compétition</th>
+                        <th>Clubs</th>
+                        <th>Type d'Accès Validé</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-n1">National 1</span></td>
+                        <td>Champ. N1</td>
+                        <td>
+                            <span class="table-club-name">FC Sochaux Montbéliard</span>
+                            <span class="table-sub-text">Stade Auguste-Bonal</span>
+                        </td>
+                        <td><span class="pass-badge pass-pitch"><i class="fa-solid fa-id-card-clip"></i> TERRAIN /
+                                PRESSE</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-cup">Coupe</span></td>
+                        <td>Coupe de France</td>
+                        <td>
+                            <span class="table-club-name">FCSM</span>
+                            <span class="table-sub-text">Jusqu'aux 16èmes de finale</span>
+                        </td>
+                        <td><span class="pass-badge pass-pitch"><i class="fa-solid fa-id-card-clip"></i> TERRAIN /
+                                PRESSE</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-n3">National 3</span></td>
+                        <td>Champ. N3</td>
+                        <td>
+                            <span class="table-club-name">FCSM, ASM Belfort</span>
+                            <span class="table-sub-text">-</span>
+                        </td>
+                        <td><span class="pass-badge pass-pitch"><i class="fa-solid fa-id-card-clip"></i> TERRAIN</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-u19">U19 NAT</span></td>
+                        <td>Playoffs U19</td>
+                        <td>
+                            <span class="table-club-name">FC Sochaux (vs PSG)</span>
+                            <span class="table-sub-text">Stade Bonal</span>
+                        </td>
+                        <td><span class="pass-badge pass-pitch"><i class="fa-solid fa-id-card-clip"></i> TERRAIN</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge" style="background:#444; color:#fff;">Régional</span></td>
+                        <td>R1 / R2 / R3</td>
+                        <td>
+                            <span class="table-club-name">OL Courcelles, US Arcey</span>
+                            <span class="table-sub-text">Clubs Locaux</span>
+                        </td>
+                        <td><span class="pass-badge pass-full"><i class="fa-solid fa-check-double"></i> ACCÈS
+                                TOTAL</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Data Visualization Section -->
+        <div id="section-dataviz" style="scroll-margin-top:120px;" class="data-viz-section reveal delay-2">
+            <h2 class="section-title" style="margin-top: 4rem; margin-bottom: 3rem;">VISUALISATION DES DONNÉES</h2>
+
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h3><i class="fa-solid fa-chart-column" style="margin-right: 10px;"></i>Répartition par Compétition
+                    </h3>
+                    <canvas id="competitionChart"></canvas>
+                    <p class="chart-note" id="total-matches-note">Total de 29 matchs officiels couverts</p>
+                </div>
+
+                <div class="chart-container">
+                    <h3><i class="fa-solid fa-chart-line" style="margin-right: 10px;"></i>Évolution Saison 2025-2026
+                    </h3>
+                    <canvas id="evolutionChart"></canvas>
+                    <p class="chart-note">Croissance régulière d'activité</p>
+                </div>
+
+                <div class="chart-container">
+                    <h3><i class="fa-solid fa-chart-pie" style="margin-right: 10px;"></i>Types de Photos</h3>
+                    <canvas id="photoTypesChart"></canvas>
+                    <p class="chart-note">Distribution du style de prise de vue</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="section-workflow" style="scroll-margin-top:120px;" class="grid-2-cols reveal delay-2">
+
+            <div class="info-panel">
+                <h3 class="section-title" style="font-size:1.4rem; margin-bottom:2rem;">WORKFLOW TECHNIQUE</h3>
+                <div class="workflow-item">
+                    <span class="wf-label">Boîtier Principal</span><span class="wf-val">Canon EOS R10 (APS-C)</span>
+                </div>
+                <div class="workflow-item">
+                    <span class="wf-label">Optique Longue</span><span class="wf-val">70-200mm f/4 USM</span>
+                </div>
+                <div class="workflow-item">
+                    <span class="wf-label">Optique Reportage</span><span class="wf-val">17-55mm f/2.8 IS</span>
+                </div>
+                <div class="workflow-item">
+                    <span class="wf-label">Logiciels</span><span class="wf-val">Creative Cloud Pro</span>
+                </div>
+                <div class="workflow-item">
+                    <span class="wf-label">Format Livraison</span><span class="wf-val">JPG Haute Def</span>
+                </div>
+                <div class="workflow-item">
+                    <span class="wf-label">Mobilité</span><span class="wf-val">Belfort / Montbéliard (25/90)</span>
+                </div>
+                <div class="workflow-item" style="border-top: 1px solid #333; margin-top: 15px; padding-top: 10px;">
+                    <span class="wf-label" style="color: var(--primary);">Éthique Pro</span><span class="wf-val"
+                        style="font-size: 0.8rem;">Respect des zones médias & sponsors</span>
+                </div>
+            </div>
+
+            <div class="info-panel">
+                <h3 class="section-title" style="font-size:1.4rem; margin-bottom:2rem;">IMPACT NUMÉRIQUE</h3>
+                <p style="color:#888; margin-bottom:2rem; font-size:0.9rem;">Statistiques d'audience cumulée sur les 3
+                    derniers mois.</p>
+
+                <div class="social-dashboard-grid">
+                    <div class="social-card-new sc-insta">
+                        <i class="fa-brands fa-instagram sc-icon" style="color: #E1306C;"></i>
+                        <span class="sc-label">Abonnés</span>
+                        <span class="sc-number social-num" data-target="613">0</span>
+                        <div class="sc-grid-details">
+                            <div class="sc-detail-item">
+                                <span class="sc-detail-val social-num" data-target="102">0</span> <span
+                                    class="sc-detail-lbl">Moy. Likes</span>
+                            </div>
+                            <div class="sc-detail-item">
+                                <span class="sc-detail-val social-num" data-target="23223">0</span> <span
+                                    class="sc-detail-lbl">Comptes Touchés</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="social-card-new sc-tiktok">
+                        <i class="fa-brands fa-tiktok sc-icon" style="color: #00f2ea;"></i>
+                        <span class="sc-label">Vues Cumulées</span>
+                        <span class="sc-number social-num" data-target="49000">0</span>
+                        <div class="sc-grid-details">
+                            <div class="sc-detail-item">
+                                <span class="sc-detail-val social-num" data-target="10960">0</span> <span
+                                    class="sc-detail-lbl">Total Likes</span>
+                            </div>
+                            <div class="sc-detail-item">
+                                <span class="sc-detail-val social-num" data-target="12100">0</span> <span
+                                    class="sc-detail-lbl">Record Vue</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    style="margin-top:1rem; padding:1rem; background:rgba(233, 69, 96, 0.1); border-left: 3px solid var(--primary); border-radius: 0 4px 4px 0;">
+                    <h4
+                        style="color:var(--primary); font-family:'Oswald', sans-serif; text-transform:uppercase; font-size:0.9rem; margin-bottom:5px;">
+                        Service Presse & Com'</h4>
+                    <p style="font-size:0.8rem; color:#ccc;">Contenu livré calibré pour les réseaux (Vertical 4:5, Story
+                        9:16). Prêt à poster.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="section-clubs" style="scroll-margin-top:120px;" class="club-section-wrapper reveal delay-2">
+            <h2 class="section-title">CLUBS & TERRAINS EXPLORÉS</h2>
+
+            <div id="dynamic-clubs-container">
+                <!-- Loaded dynamically -->
+            </div>
+        </div>
+
+        <script>
+            (async function loadClubs() {
+                try {
+                    const res = await fetch('/clubs_terrains.json?v=' + Date.now());
+                    const divisions = await res.json();
+                    const container = document.getElementById('dynamic-clubs-container');
+
+                    container.innerHTML = divisions.map(div => {
+                        let iconHtml = div.logo.startsWith('images/')
+                            ? `<img src="${div.logo}" alt="${div.name}" class="division-logo">`
+                            : `<i class="${div.logo}"></i>`;
+
+                        let clubsHtml = div.clubs.map(c => `
+                            <div class="club-bubble" title="${c.name}">
+                                <img src="${c.logo}" alt="${c.name}" onerror="this.parentElement.style.display='none'">
+                            </div>
+                        `).join('');
+
+                        return `
+                            <div class="division-row row-${div.id}">
+                                <div class="division-label">
+                                    ${iconHtml} ${div.name}
+                                </div>
+                                <div class="club-grid-dashboard">
+                                    ${clubsHtml}
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                } catch (e) {
+                    console.error('Error loading clubs', e);
+                }
+            })();
+        </script>
+
+        <div style="text-align:center;" class="reveal delay-3">
+            <a href="index.html#contact" class="btn btn-outline" style="background:#fff; color:#000;">
+                ME CONTACTER / RÉSERVER UNE DATE
+            </a>
+        </div>
+
+    </div>
+
+    <div class="footer-note">
+        &copy; 2026 Alexis Sartoris. Données mises à jour en Janvier 2026.
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="main.js?v=5"></script>
+    <script src="charts.js?v=5"></script>
+</body>
+
+</html>

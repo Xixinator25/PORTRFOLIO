@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shooted by Alexis | Photographe Sportif à Montbéliard</title>
+    <meta name="description" content="Alexis Sartoris, photographe sportif spécialisé dans le football (FCSM). Découvrez mes albums photos des matchs au Stade Bonal et en National 1.">
+    <link rel="canonical" href="https://shooted-by-alexis.vercel.app/">
+    
+    <meta name="keywords" content="Alexis Sartoris, Photographe Sportif, Football, FCSM, Sochaux, Stade Bonal, National 1, Photographie Sportive, Montélimar, Belfort">
+    <meta name="author" content="Alexis Sartoris">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shooted-by-alexis.vercel.app/">
+    <meta property="og:title" content="Shooted by Alexis | Photographe Sportif">
+    <meta property="og:description"
+        content="Photographe sportif basé à Montbéliard / Belfort. Spécialisé dans le football et le sport professionnel. Découvrez mes derniers matchs et projets.">
+    <meta property="og:image" content="https://shooted-by-alexis.vercel.app/images/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://shooted-by-alexis.vercel.app/">
+    <meta property="twitter:title" content="Shooted by Alexis | Photographe Sportif">
+    <meta property="twitter:description"
+        content="Photographe sportif basé à Montbéliard / Belfort. Spécialisé dans le football et le sport professionnel.">
+    <meta name="twitter:image" content="https://shooted-by-alexis.vercel.app/images/hero-bg.jpg">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Shooted by Alexis - Alexis Sartoris Photographie",
+      "image": "https://shooted-by-alexis.vercel.app/images/hero-bg.jpg",
+      "@id": "https://shooted-by-alexis.vercel.app/",
+      "url": "https://shooted-by-alexis.vercel.app/",
+      "telephone": "",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "",
+        "addressLocality": "Montbéliard",
+        "postalCode": "25200",
+        "addressCountry": "FR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 47.5103,
+        "longitude": 6.7981
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+      },
+      "sameAs": [
+        "https://www.instagram.com/alexis.sartoris/"
+      ],
+      "priceRange": "$$"
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Oswald:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css?v=5">
+    <link rel="icon" href="favicon.png" type="image/png">
+
+    <!-- LCP Optimization -->
+    <link rel="preload" as="image" href="images/hero-bg.jpg" fetchpriority="high">
+
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="nUkMKqq2bkDasTZFEmttKYc-TDZzvIkUB8TtfJxol_Q" />
+
+    <!-- Bing Webmaster Verification -->
+    <meta name="msvalidate.01" content="A9C2F9DE0CEE3C215B66ACD0BF20D4E8" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EMP4WE6BNW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-EMP4WE6BNW');
+    </script>
+
+    <!-- Anti-Flicker Script -->
+    <script>
+        if (sessionStorage.getItem('visited')) {
+            document.documentElement.classList.add('fast-load');
+        }
+    </script>
+</head>
+
+<body id="top">
+
+    <div id="loader">
+        <div class="viewfinder-container">
+            <div class="vf-frame"></div>
+            <div class="vf-corner vf-tl"></div>
+            <div class="vf-corner vf-tr"></div>
+            <div class="vf-corner vf-bl"></div>
+            <div class="vf-corner vf-br"></div>
+            <div class="vf-info vf-iso">ISO 1600</div>
+            <div class="vf-info vf-shutter">1/1000</div>
+            <div class="vf-info vf-aperture">F/2.8</div>
+            <div class="vf-info vf-rec">
+                <div class="rec-dot"></div>REC
+            </div>
+            <div class="focus-center">
+                <div class="focus-crosshair">
+                    <div class="focus-box-center"></div>
+                </div>
+                <div class="loader-text">INITIALISATION</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="noise-overlay"></div>
+    <div id="cursor-glow"></div>
+
+    <div id="lightbox">
+        <div id="lightbox-close">&times;</div>
+        <div id="lb-prev" class="lb-nav-btn"><i class="fa-solid fa-chevron-left"></i></div>
+        <div id="lb-next" class="lb-nav-btn"><i class="fa-solid fa-chevron-right"></i></div>
+        <img id="lightbox-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+            alt="Zoom">
+    </div>
+
+    <header>
+        <div class="logo"><a href="#top">shooted.by.<span>alexis</span></a></div>
+        <nav>
+            <ul>
+                <li><a href="#portfolio">Galerie</a></li>
+                <li><a href="stats.html" style="color:var(--primary);">Data & Stats</a></li>
+                <li><a href="about.html">À Propos</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-tag">Photographie Sportive</div>
+            <h1 class="main-title">SHOOTED BY ALEXIS</h1>
+            <h2>Je capture<br><span class="type-text"></span></h2>
+            <a href="#portfolio" class="btn btn-primary">Découvrir les albums</a>
+        </div>
+    </section>
+
+    <div class="sport-separator"></div>
+
+    <!-- Recent Matches Section -->
+    <section class="recent-matches-section">
+        <div class="section-header reveal">
+            <h2>Derniers <span>Matchs Couverts</span></h2>
+            <p class="reveal delay-1">Mes dernières couvertures photo en compétition</p>
+        </div>
+
+        <div id="recent-matches-timeline" class="match-timeline reveal delay-2">
+            <!-- Matches will be injected here by JavaScript -->
+        </div>
+    </section>
+
+    <div class="sport-separator"></div>
+
+    <section id="portfolio" class="portfolio">
+        <div class="section-header reveal">
+            <h2>Mes <span>Albums</span></h2>
+        </div>
+        <div id="gallery-container" class="gallery-grid reveal delay-1"></div>
+    </section>
+
+    <div class="sport-separator"></div>
+
+    <section class="split-section">
+        <div class="split-stats">
+            <div class="section-header reveal">
+                <h2>Mes <span>Terrains</span></h2>
+            </div>
+            <div class="stats-cards-grid reveal delay-1">
+                <div class="comp-badge">
+                    <div class="badge-icon"><i class="fa-solid fa-trophy"></i></div>
+                    <div class="badge-info">
+                        <span class="badge-title">NATIONAL 1</span>
+                        <span class="badge-sub" style="color:var(--primary); font-weight:700;" id="hm-n1">8
+                            MATCHS</span>
+                    </div>
+                </div>
+                <div class="comp-badge">
+                    <div class="badge-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="badge-info">
+                        <span class="badge-title">NATIONAL 3</span>
+                        <span class="badge-sub" style="color:var(--primary); font-weight:700;" id="hm-n3">7
+                            MATCHS</span>
+                    </div>
+                </div>
+                <div class="comp-badge">
+                    <div class="badge-icon"><i class="fa-solid fa-medal"></i></div>
+                    <div class="badge-info">
+                        <span class="badge-title">COUPE DE FRANCE</span>
+                        <span class="badge-sub" style="color:var(--primary); font-weight:700;" id="hm-cup">5
+                            MATCHS</span>
+                        <span class="badge-sub" style="font-size:0.65rem; margin-top:2px;">17e : FCSM - RC LENS</span>
+                    </div>
+                </div>
+                <div class="comp-badge special-badge">
+                    <div class="badge-icon"><i class="fa-solid fa-star"></i></div>
+                    <div class="badge-info">
+                        <span class="badge-title">QUART DE FINALE U19</span>
+                        <span class="badge-sub" style="color:#fff;" id="hm-other">FCSM - PARIS SG</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="split-zone">
+            <div class="zone-badge reveal delay-2">
+                <i class="fa-solid fa-map-location-dot zone-icon"></i>
+                <div class="zone-title">Zone d'Action</div>
+                <div class="zone-list">
+                    <div class="zone-item"><i class="fa-solid fa-location-dot"></i> Montbéliard (25)</div>
+                    <div class="zone-item"><i class="fa-solid fa-location-arrow"></i> Belfort (90)</div>
+                    <div class="zone-item"><i class="fa-solid fa-route"></i> Héricourt (70)</div>
+                    <div class="zone-item" style="color:var(--primary); margin-top:5px;"><i class="fa-solid fa-car"></i>
+                        +30km sur devis</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section Removed - Moved to about.html -->
+
+    <div class="sport-separator"></div>
+
+    <div class="gear-section">
+        <div class="section-header reveal" style="margin-bottom:2rem;">
+            <h2><span>Matériel</span></h2>
+        </div>
+        <div class="gear-grid reveal delay-1">
+            <div class="gear-item"><i class="fa-solid fa-camera gear-icon"></i><span class="gear-name">Canon EOS
+                    R10</span><span class="gear-detail">Boîtier Principal</span></div>
+            <div class="gear-item"><i class="fa-solid fa-circle-notch gear-icon"></i><span class="gear-name">70-200mm
+                    F/4</span><span class="gear-detail">Téléobjectif</span></div>
+            <div class="gear-item"><i class="fa-solid fa-eye gear-icon"></i><span class="gear-name">17-55 IS
+                    F/2.8</span><span class="gear-detail">Grand Angle</span></div>
+            <div class="gear-item"><i class="fa-solid fa-wand-magic-sparkles gear-icon"></i><span
+                    class="gear-name">Creative Cloud Pro</span><span class="gear-detail">Retouche & IA</span></div>
+        </div>
+    </div>
+
+    <div class="sport-separator"></div>
+
+    <section class="insta-section">
+        <div class="section-header reveal">
+            <h2>Sur <span>Instagram</span></h2>
+        </div>
+        <div id="insta-container" class="insta-container reveal delay-1">
+            <!-- Loaded dynamically from instagram_posts.json -->
+        </div>
+        <div class="reveal delay-2" style="text-align:center; margin-top:3rem;">
+            <a href="https://www.instagram.com/shooted.by.alexis/" target="_blank" class="btn btn-outline">Voir tout le
+                profil</a>
+        </div>
+    </section>
+
+    <div class="sport-separator"></div>
+
+    <section id="contact" class="contact-section">
+
+        <div class="section-header reveal">
+            <h2>Tactique <span>de Contact</span> <span class="status-badge" id="contact-status-badge"><span
+                        class="status-dot" id="contact-status-dot"></span> <span
+                        id="contact-status-text">Dispo</span></span></h2>
+            <p class="contact-cta-text reveal delay-1">Prêt à entrer en jeu ? Discutons de votre projet photo.</p>
+        </div>
+
+        <div class="faq-container reveal delay-2">
+            <div class="faq-title">Questions d'Avant-Match</div>
+            <div class="faq-item">
+                <div class="faq-question">Quels sont tes tarifs ? <i class="fa-solid fa-plus faq-icon"></i></div>
+                <div class="faq-answer">
+                    Tarifs adaptés à la taille de l'équipe :<br>
+                    • Moins de 4 joueurs : <strong>10€ / joueur</strong><br>
+                    • Plus de 4 joueurs : <strong>5€ / joueur</strong><br>
+                    • Forfait Match (Équipe complète) : <strong>50€</strong>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Tu te déplaces jusqu'où ? <i class="fa-solid fa-plus faq-icon"></i></div>
+                <div class="faq-answer">Je me déplace principalement dans un rayon de <strong>30 minutes autour de
+                        Montbéliard</strong> (Belfort, Héricourt...). Pour des distances plus longues, contacte-moi pour
+                    en discuter (défraiement possible).</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Combien de temps pour les photos ? <i class="fa-solid fa-plus faq-icon"></i>
+                </div>
+                <div class="faq-answer">Traitement rapide : je livre généralement les photos en <strong>3 jours en
+                        moyenne</strong>. Le délai maximum est d'<strong>une semaine</strong>.</div>
+            </div>
+        </div>
+
+        <div class="tactical-board reveal delay-1">
+            <div class="tactical-line mid-line"></div>
+            <div class="tactical-line center-circle"></div>
+            <div class="center-spot"></div>
+            <div class="tactical-line box-left"></div>
+            <div class="tactical-line box-right"></div>
+
+            <a href="mailto:asartoris@outlook.fr" class="player-token" style="top: 20%; left: 20%;">
+                <i class="fa-solid fa-envelope"></i>
+                <div class="token-label">Email</div>
+            </a>
+            <a href="tel:+33658834707" class="player-token" style="top: 20%; right: 20%;">
+                <i class="fa-solid fa-phone"></i>
+                <div class="token-label">06 58 83 47 07</div>
+            </a>
+            <a href="https://instagram.com/shooted.by.alexis" target="_blank" class="player-token"
+                style="bottom: 20%; left: 20%;">
+                <i class="fa-brands fa-instagram"></i>
+                <div class="token-label">DM Insta</div>
+            </a>
+            <a href="#contact-form" class="player-token" style="bottom: 20%; right: 20%; border-color: #00ff41;">
+                <i class="fa-solid fa-calendar-check" style="color:#00ff41 !important;"></i>
+                <div class="token-label">Réserver</div>
+            </a>
+        </div>
+
+        <div id="contact-form" class="match-sheet-form reveal delay-2">
+            <div class="form-header">
+                <div class="form-title">FEUILLE DE MATCH</div>
+                <div class="form-date">SAISON 2026</div>
+            </div>
+            <form action="https://formspree.io/f/xqarnjrl" method="POST">
+                <div class="form-group">
+                    <label>Nom du Joueur / Club</label>
+                    <input type="text" name="nom" placeholder="Ex: FC Sochaux / Alex Dupont" required>
+                </div>
+                <div class="form-group">
+                    <label>Votre Email (Pour la réponse)</label>
+                    <input type="email" name="email" placeholder="contact@exemple.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Type de Match (Sujet)</label>
+                    <select name="sujet">
+                        <option>Reportage Match</option>
+                        <option>Shooting Perso</option>
+                        <option>Autre demande</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Tactique & Message</label>
+                    <textarea name="message" rows="4" placeholder="Détaille ton projet ici..." required></textarea>
+                </div>
+                <button type="submit" class="form-submit">ENVOYER LA CONVOCATION</button>
+            </form>
+        </div>
+
+    </section>
+
+    <footer>
+        <p style="padding:2rem; color:#444; font-size:0.8rem; text-align: center;">&copy; 2026 Alexis Sartoris -
+            shooted.by.alexis</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="main.js?v=5"></script>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+[
+  {
+    "id": "l1",
+    "name": "Ligue 1",
+    "logo": "images/logos/ligue_1.png",
+    "clubs": [
+      {
+        "name": "RC Lens",
+        "logo": "images/logos/rclens.png"
+      }
+    ]
+  },
+  {
+    "id": "nat",
+    "name": "National 1/2/3",
+    "logo": "images/logos/Championnat_National.png",
+    "clubs": [
+      {
+        "name": "FC Sochaux",
+        "logo": "images/logos/fcsm.png"
+      },
+      {
+        "name": "FC Rouen",
+        "logo": "images/logos/Logo_FC_Rouen.png"
+      },
+      {
+        "name": "DFCO",
+        "logo": "images/logos/dfco.png"
+      },
+      {
+        "name": "FC Versailles",
+        "logo": "images/logos/Logo_FC_Versailles.png"
+      },
+      {
+        "name": "LB Châteauroux",
+        "logo": "images/logos/LBChateauroux.png"
+      },
+      {
+        "name": "SM Caen",
+        "logo": "images/logos/smcaen.png"
+      },
+      {
+        "name": "Bourg-Péronnas",
+        "logo": "images/logos/fbbp.png"
+      },
+      {
+        "name": "FCVB",
+        "logo": "images/logos/Logo_FCVB.png"
+      },
+      {
+        "name": "Aubagne",
+        "logo": "images/logos/scaab.png"
+      },
+      {
+        "name": "Stade Briochin",
+        "logo": "images/logos/Logo_Stade_Briochin.png"
+      },
+      {
+        "name": "ASM Belfort",
+        "logo": "images/logos/asmbelfort.png"
+      },
+      {
+        "name": "Racing Besançon",
+        "logo": "images/logos/Logo_Racing_Besançon.png"
+      },
+      {
+        "name": "US Ivry",
+        "logo": "images/logos/US_Ivry_Football.png"
+      },
+      {
+        "name": "Sarreguemines",
+        "logo": "images/logos/Logo_Sarreguemines_FC.png"
+      }
+    ]
+  },
+  {
+    "id": "reg",
+    "name": "Régional et Départemental",
+    "logo": "fa-solid fa-location-dot",
+    "clubs": [
+      {
+        "name": "OL Courcelles",
+        "logo": "images/logos/olcourcelles.png"
+      },
+      {
+        "name": "AS Audincourt",
+        "logo": "images/logos/asaudincourt.png"
+      },
+      {
+        "name": "US Arcey",
+        "logo": "images/logos/usarcey.png"
+      },
+      {
+        "name": "FC Grandvillars",
+        "logo": "images/logos/fcgrandvillars.png"
+      },
+      {
+        "name": "Pont-de-Roide",
+        "logo": "images/logos/US_Pont-de-Roide_Vermondans.png"
+      },
+      {
+        "name": "Vélo Club Montbéliard",
+        "logo": "images/logos/vcm.png"
+      }
+    ]
+  }
+]
