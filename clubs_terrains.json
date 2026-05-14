@@ -20,32 +20,44 @@
         "logo": "images/logos/fcsm.png"
       },
       {
-        "name": "FC Rouen",
-        "logo": "images/logos/Logo_FC_Rouen.png"
-      },
-      {
         "name": "DFCO",
         "logo": "images/logos/dfco.png"
+      },
+      {
+        "name": "FC Rouen",
+        "logo": "images/logos/Logo_FC_Rouen.png"
       },
       {
         "name": "FC Versailles",
         "logo": "images/logos/Logo_FC_Versailles.png"
       },
       {
+        "name": "SM Caen",
+        "logo": "images/logos/smcaen.png"
+      },
+      {
+        "name": "VAFC",
+        "logo": "images/logos/VAFC.png"
+      },
+      {
         "name": "LB Châteauroux",
         "logo": "images/logos/LBChateauroux.png"
       },
       {
-        "name": "SM Caen",
-        "logo": "images/logos/smcaen.png"
+        "name": "FCVB",
+        "logo": "images/logos/Logo_FCVB.png"
+      },
+      {
+        "name": "QRM",
+        "logo": "images/logos/QRM.png"
       },
       {
         "name": "Bourg-Péronnas",
         "logo": "images/logos/fbbp.png"
       },
       {
-        "name": "FCVB",
-        "logo": "images/logos/Logo_FCVB.png"
+        "name": "US Concarneau",
+        "logo": "images/logos/Logo_US_Concarneau.png"
       },
       {
         "name": "Aubagne",
