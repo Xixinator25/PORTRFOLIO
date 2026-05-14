@@ -32,6 +32,17 @@
             "homeLogo": "images/logos/fcsm.png",
             "awayLogo": "images/logos/QRM.png",
             "albumId": "2026-05-14_fcsm-vs-qrm"
+        },
+        {
+            "id": 1778793996851,
+            "homeTeam": "Le Mans FC",
+            "awayTeam": "Clermont Foot",
+            "date": "2026-04-17",
+            "competition": "Ligue 2",
+            "competitionBadge": "badge-l2",
+            "homeLogo": "images/logos/LEMANSFC.png",
+            "awayLogo": "images/logos/CLERMONTFOOT.png",
+            "albumId": ""
         }
     ]
 }
