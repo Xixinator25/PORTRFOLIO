@@ -301,6 +301,17 @@ function renderStatsForm() {
     if (statsData.status && statsData.status.available !== undefined) {
         document.getElementById('status-available').value = statsData.status.available.toString();
     }
+
+    // Impact Numérique
+    if (statsData.impactNumerique) {
+        const imp = statsData.impactNumerique;
+        document.getElementById('insta-followers').value = imp.instaFollowers || 0;
+        document.getElementById('insta-likes').value = imp.instaLikes || 0;
+        document.getElementById('insta-reach').value = imp.instaReach || 0;
+        document.getElementById('tiktok-views').value = imp.tiktokViews || 0;
+        document.getElementById('tiktok-likes').value = imp.tiktokLikes || 0;
+        document.getElementById('tiktok-record').value = imp.tiktokRecord || 0;
+    }
 }
 
 // Open Album Modal
@@ -688,6 +699,16 @@ saveAllBtn.onclick = async () => {
             parseInt(document.getElementById('type-ambiance').value) || 0,
             parseInt(document.getElementById('type-celebrations').value) || 0
         ];
+        
+        // Impact Numérique
+        statsData.impactNumerique = {
+            instaFollowers: parseInt(document.getElementById('insta-followers').value) || 0,
+            instaLikes: parseInt(document.getElementById('insta-likes').value) || 0,
+            instaReach: parseInt(document.getElementById('insta-reach').value) || 0,
+            tiktokViews: parseInt(document.getElementById('tiktok-views').value) || 0,
+            tiktokLikes: parseInt(document.getElementById('tiktok-likes').value) || 0,
+            tiktokRecord: parseInt(document.getElementById('tiktok-record').value) || 0
+        };
 
         if (!statsData.status) statsData.status = {};
         statsData.status.available = document.getElementById('status-available').value === 'true';

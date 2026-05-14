@@ -316,14 +316,14 @@
                     <div class="social-card-new sc-insta">
                         <i class="fa-brands fa-instagram sc-icon" style="color: #E1306C;"></i>
                         <span class="sc-label">Abonnés</span>
-                        <span class="sc-number social-num" data-target="613">0</span>
+                        <span class="sc-number social-num" id="stat-insta-followers" data-target="0">0</span>
                         <div class="sc-grid-details">
                             <div class="sc-detail-item">
-                                <span class="sc-detail-val social-num" data-target="102">0</span> <span
+                                <span class="sc-detail-val social-num" id="stat-insta-likes" data-target="0">0</span> <span
                                     class="sc-detail-lbl">Moy. Likes</span>
                             </div>
                             <div class="sc-detail-item">
-                                <span class="sc-detail-val social-num" data-target="23223">0</span> <span
+                                <span class="sc-detail-val social-num" id="stat-insta-reach" data-target="0">0</span> <span
                                     class="sc-detail-lbl">Comptes Touchés</span>
                             </div>
                         </div>
@@ -332,14 +332,14 @@
                     <div class="social-card-new sc-tiktok">
                         <i class="fa-brands fa-tiktok sc-icon" style="color: #00f2ea;"></i>
                         <span class="sc-label">Vues Cumulées</span>
-                        <span class="sc-number social-num" data-target="49000">0</span>
+                        <span class="sc-number social-num" id="stat-tiktok-views" data-target="0">0</span>
                         <div class="sc-grid-details">
                             <div class="sc-detail-item">
-                                <span class="sc-detail-val social-num" data-target="10960">0</span> <span
+                                <span class="sc-detail-val social-num" id="stat-tiktok-likes" data-target="0">0</span> <span
                                     class="sc-detail-lbl">Total Likes</span>
                             </div>
                             <div class="sc-detail-item">
-                                <span class="sc-detail-val social-num" data-target="12100">0</span> <span
+                                <span class="sc-detail-val social-num" id="stat-tiktok-record" data-target="0">0</span> <span
                                     class="sc-detail-lbl">Record Vue</span>
                             </div>
                         </div>
@@ -397,6 +397,27 @@
                     }).join('');
                 } catch (e) {
                     console.error('Error loading clubs', e);
+                }
+            })();
+
+            (async function loadImpactStats() {
+                try {
+                    const res = await fetch('/api/stats?v=' + Date.now());
+                    const data = await res.json();
+                    if (data.impactNumerique) {
+                        const imp = data.impactNumerique;
+                        document.getElementById('stat-insta-followers').setAttribute('data-target', imp.instaFollowers);
+                        document.getElementById('stat-insta-likes').setAttribute('data-target', imp.instaLikes);
+                        document.getElementById('stat-insta-reach').setAttribute('data-target', imp.instaReach);
+                        document.getElementById('stat-tiktok-views').setAttribute('data-target', imp.tiktokViews);
+                        document.getElementById('stat-tiktok-likes').setAttribute('data-target', imp.tiktokLikes);
+                        document.getElementById('stat-tiktok-record').setAttribute('data-target', imp.tiktokRecord);
+                        
+                        // Trigger count animation for elements that might already be in view
+                        // The observer in main.js will handle most cases, but we can manually re-trigger if needed.
+                    }
+                } catch (e) {
+                    console.error('Error loading impact stats', e);
                 }
             })();
         </script>
