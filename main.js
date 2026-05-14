@@ -601,19 +601,23 @@ async function initDynamicStats() {
         const stats = await response.json();
 
         // Update "Mes Terrains" numbers
+        const homeL2 = document.getElementById('hm-l2');
         const homeN1 = document.getElementById('hm-n1');
         const homeN3 = document.getElementById('hm-n3');
         const homeCup = document.getElementById('hm-cup');
         const homeOther = document.getElementById('hm-other'); // This one has FCSM - PARIS SG, keeping it or updating?
-        // Wait, the user asked to update "le nombre de matchs se mettent aussi a jour"
+        
+        if (homeL2 && stats.competitionDistribution) {
+            homeL2.innerText = `${stats.competitionDistribution.values[0]} MATCH`;
+        }
         if (homeN1 && stats.competitionDistribution) {
-            homeN1.innerText = `${stats.competitionDistribution.values[0]} MATCHS`;
+            homeN1.innerText = `${stats.competitionDistribution.values[1]} MATCHS`;
         }
         if (homeN3 && stats.competitionDistribution) {
-            homeN3.innerText = `${stats.competitionDistribution.values[1]} MATCHS`;
+            homeN3.innerText = `${stats.competitionDistribution.values[2]} MATCHS`;
         }
         if (homeCup && stats.competitionDistribution) {
-            homeCup.innerText = `${stats.competitionDistribution.values[2]} MATCHS`;
+            homeCup.innerText = `${stats.competitionDistribution.values[3]} MATCHS`;
         }
 
         // Contact Section Status

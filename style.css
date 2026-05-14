@@ -1793,6 +1793,12 @@ body.fast-load .hero .btn {
         color: #fff;
     }
 
+    .badge-l2 {
+        background: #003366; /* Deep Professional Blue */
+        color: #fff;
+        border: 1px solid #004080;
+    }
+
     .pass-badge {
         display: inline-flex;
         align-items: center;
@@ -2193,6 +2199,12 @@ body.fast-load .hero .btn {
 .bg-n1 {
     background: #fff;
     color: #000;
+}
+
+.bg-l2 {
+    background: linear-gradient(45deg, #003366, #0059b3);
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0, 51, 102, 0.3);
 }
 
 .bg-u19 {

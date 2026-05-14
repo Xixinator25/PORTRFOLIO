@@ -1,16 +1,17 @@
 {
   "competitionDistribution": {
     "labels": [
+      "Ligue 2",
       "National 1",
       "National 3",
       "Coupe de France",
       "U19 / Autres"
     ],
     "values": [
+      1,
       14,
       7,
-      5,
-      12
+      5
     ]
   },
   "seasonEvolution": {
