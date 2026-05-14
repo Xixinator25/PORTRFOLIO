@@ -1,5 +1,20 @@
 [
   {
+    "id": "l2",
+    "name": "Ligue 2",
+    "logo": "images/logos/ligue_2.png",
+    "clubs": [
+      {
+        "name": "Le Mans FC",
+        "logo": "images/logos/LEMANSFC.png"
+      },
+      {
+        "name": "Clermont Foot",
+        "logo": "images/logos/CLERMONTFOOT.png"
+      }
+    ]
+  },
+  {
     "id": "l1",
     "name": "Ligue 1",
     "logo": "images/logos/ligue_1.png",

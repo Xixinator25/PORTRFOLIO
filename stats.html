@@ -202,8 +202,8 @@
                         <td><span class="badge badge-l2">Ligue 2</span></td>
                         <td>Ligue 2 BKT</td>
                         <td>
-                            <span class="table-club-name">Accréditation Ponctuelle</span>
-                            <span class="table-sub-text">Championnat Professionnel</span>
+                            <span class="table-club-name">Accréditation Club</span>
+                            <span class="table-sub-text">Le Mans FC</span>
                         </td>
                         <td><span class="pass-badge pass-pitch"><i class="fa-solid fa-id-card-clip"></i> TERRAIN /
                                 PRESSE</span></td>
@@ -412,7 +412,7 @@
 
             (async function loadImpactStats() {
                 try {
-                    const res = await fetch('/api/stats?v=' + Date.now());
+                    const res = await fetch('/stats_data.json?v=' + Date.now());
                     const data = await res.json();
                     if (data.impactNumerique) {
                         const imp = data.impactNumerique;
