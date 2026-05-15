@@ -1,5 +1,14 @@
 [
   {
+    "date": "AVRIL 2026",
+    "homeTeam": "Le Mans FC",
+    "awayTeam": "Clermont Foot",
+    "homeLogo": "images/logos/LEMANSFC.png",
+    "awayLogo": "images/logos/CLERMONTFOOT.png",
+    "competition": "Ligue 2",
+    "badgeClass": "bg-l2"
+  },
+  {
     "date": "JAN 2026",
     "homeTeam": "FCSM",
     "awayTeam": "RC LENS",
