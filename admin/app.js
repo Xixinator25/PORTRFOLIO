@@ -272,10 +272,12 @@ function renderStatsForm() {
 
     // Competition Distribution
     const compValues = statsData.competitionDistribution.values;
-    document.getElementById('comp-n1').value = compValues[0];
-    document.getElementById('comp-n3').value = compValues[1];
-    document.getElementById('comp-cup').value = compValues[2];
-    document.getElementById('comp-other').value = compValues[3];
+    document.getElementById('comp-l1').value = compValues[0] || 0;
+    document.getElementById('comp-l2').value = compValues[1] || 0;
+    document.getElementById('comp-n1').value = compValues[2] || 0;
+    document.getElementById('comp-n3').value = compValues[3] || 0;
+    document.getElementById('comp-cup').value = compValues[4] || 0;
+    document.getElementById('comp-other').value = compValues[5] || 0;
 
     // Season Evolution
     const monthValues = statsData.seasonEvolution.values;
@@ -674,6 +676,8 @@ saveAllBtn.onclick = async () => {
     // 1. Prepare Stats Data
     if (statsData) {
         statsData.competitionDistribution.values = [
+            parseInt(document.getElementById('comp-l1').value) || 0,
+            parseInt(document.getElementById('comp-l2').value) || 0,
             parseInt(document.getElementById('comp-n1').value) || 0,
             parseInt(document.getElementById('comp-n3').value) || 0,
             parseInt(document.getElementById('comp-cup').value) || 0,
