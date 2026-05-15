@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         // Fallback to default data (Updated with correct values)
         statsData = {
             competitionDistribution: {
-                labels: ['National 1', 'National 3', 'Coupe de France', 'U19 / Autres'],
-                values: [10, 7, 5, 7]
+                labels: ['Ligue 1', 'Ligue 2', 'National 1', 'National 3', 'Coupe de France', 'U19 / Autres'],
+                values: [0, 1, 14, 7, 5, 2]
             },
             seasonEvolution: {
                 labels: ['Août', 'Sept', 'Oct', 'Nov', 'Déc', 'Jan', 'Fév', 'Mars', 'Avr', 'Mai'],

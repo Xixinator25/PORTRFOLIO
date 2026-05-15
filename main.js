@@ -575,7 +575,11 @@ function createMatchCard(match) {
         year: 'numeric'
     });
 
+    const isLigue2 = match.competition.toUpperCase().includes('LIGUE 2');
+    const specialBadge = isLigue2 ? `<div class="badge-l2" style="position: absolute; top: 15px; right: 15px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1px;">PRO : LIGUE 2</div>` : '';
+
     card.innerHTML = `
+        ${specialBadge}
         <div class="match-date">
             <i class="fa-regular fa-calendar"></i>
             ${formattedDate}
@@ -612,16 +616,16 @@ async function initDynamicStats() {
         const homeOther = document.getElementById('hm-other'); // This one has FCSM - PARIS SG, keeping it or updating?
         
         if (homeL2 && stats.competitionDistribution) {
-            homeL2.innerText = `${stats.competitionDistribution.values[0]} MATCH`;
+            homeL2.innerText = `${stats.competitionDistribution.values[1]} MATCH`;
         }
         if (homeN1 && stats.competitionDistribution) {
-            homeN1.innerText = `${stats.competitionDistribution.values[1]} MATCHS`;
+            homeN1.innerText = `${stats.competitionDistribution.values[2]} MATCHS`;
         }
         if (homeN3 && stats.competitionDistribution) {
-            homeN3.innerText = `${stats.competitionDistribution.values[2]} MATCHS`;
+            homeN3.innerText = `${stats.competitionDistribution.values[3]} MATCHS`;
         }
         if (homeCup && stats.competitionDistribution) {
-            homeCup.innerText = `${stats.competitionDistribution.values[3]} MATCHS`;
+            homeCup.innerText = `${stats.competitionDistribution.values[4]} MATCHS`;
         }
 
         // Contact Section Status

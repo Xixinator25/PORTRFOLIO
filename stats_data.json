@@ -1,6 +1,7 @@
 {
   "competitionDistribution": {
     "labels": [
+      "Ligue 1",
       "Ligue 2",
       "National 1",
       "National 3",
@@ -8,10 +9,10 @@
       "U19 / Autres"
     ],
     "values": [
+      0,
       1,
       14,
-      7,
-      5
+      7
     ]
   },
   "seasonEvolution": {
