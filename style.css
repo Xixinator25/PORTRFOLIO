@@ -2050,14 +2050,16 @@ body.fast-load .hero .btn {
         text-transform: uppercase;
     }
 
-    .footer-note {
-        text-align: center;
-        color: #444;
-        font-size: 0.8rem;
-        margin-top: 4rem;
-        padding-top: 2rem;
-        border-top: 1px solid var(--border-color);
-    }
+}
+
+.footer-note {
+    text-align: center;
+    color: #444;
+    font-size: 0.8rem;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-top: 1px solid var(--border-color);
 }
 
 /* --- MODAL MATCHS (STYLE) --- */
@@ -2091,6 +2093,9 @@ body.fast-load .hero .btn {
     transform: scale(0.95);
     transition: transform 0.3s;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    max-height: 85vh;
 }
 
 #match-modal.open .modal-content {
@@ -2782,13 +2787,18 @@ body.fast-load .hero .btn {
     /* MODAL MATCHS */
     .modal-content {
         width: 92% !important;
-        max-height: 85vh;
+        max-height: 85vh !important;
         margin: 0 auto;
         border: 1px solid var(--primary);
+        display: flex !important;
+        flex-direction: column !important;
     }
 
     .match-list {
         padding: 0 10px;
+        overflow-y: auto !important;
+        flex: 1 !important;
+        -webkit-overflow-scrolling: touch !important;
     }
 
     .match-row {
@@ -2851,13 +2861,22 @@ body.fast-load .hero .btn {
     }
 
     .workflow-item {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 5px !important;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: 10px !important;
+        padding-bottom: 8px !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .wf-label {
+        font-size: 0.8rem !important;
     }
 
     .wf-val {
-        text-align: left;
+        font-size: 0.8rem !important;
+        text-align: right !important;
         color: var(--primary);
     }
 
@@ -2870,15 +2889,15 @@ body.fast-load .hero .btn {
     }
 
     .club-bubble {
-        width: 60px !important;
-        height: 60px !important;
+        width: 65px !important;
+        height: 65px !important;
         padding: 10px !important;
         display: flex !important;
     }
 
     .club-bubble img {
-        max-width: 40px !important;
-        max-height: 40px !important;
+        max-width: 45px !important;
+        max-height: 45px !important;
     }
 
     .division-row {
@@ -3745,5 +3764,13 @@ body.fast-load .hero .btn {
         transform: translateY(0) !important;
         background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 20%, rgba(0, 0, 0, 0.6) 80%, transparent) !important;
         padding: 1.5rem !important;
+    }
+}
+
+/* --- MOBILE SOCIAL DASHBOARD STACK --- */
+@media (max-width: 580px) {
+    .social-dashboard-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
     }
 }

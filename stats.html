@@ -19,13 +19,13 @@
 
     <div id="cursor-glow"></div>
 
-    <div id="match-modal" onclick="closeMatchModal(event)">
-        <div class="modal-content">
+    <div id="match-modal" onclick="closeMatchModal(event)" data-lenis-prevent>
+        <div class="modal-content" data-lenis-prevent>
             <div class="modal-header">
                 <h3 class="modal-title">Top Affiches</h3>
                 <span class="close-modal" onclick="closeMatchModal(event)">&times;</span>
             </div>
-            <div class="match-list" id="top-affiches-list">
+            <div class="match-list" id="top-affiches-list" data-lenis-prevent>
                 <!-- Loaded dynamically -->
             </div>
         </div>

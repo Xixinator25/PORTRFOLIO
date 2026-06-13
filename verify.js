@@ -16,34 +16,53 @@ const scripts = [];
 const linkRegex = /href=["']([^"']+)["']/g;
 const scriptRegex = /src=["']([^"']+)["']/g;
 
+const cleanPath = (url) => {
+    if (url.startsWith('data:')) return null;
+    return url.split('?')[0].split('#')[0];
+};
+
 let match;
 while ((match = linkRegex.exec(html)) !== null) {
-    if (!match[1].startsWith('http') && !match[1].startsWith('#') && !match[1].startsWith('mailto:') && !match[1].startsWith('tel:')) {
-        links.push(match[1]);
+    const val = match[1];
+    if (!val.startsWith('http') && !val.startsWith('#') && !val.startsWith('mailto:') && !val.startsWith('tel:')) {
+        const cleaned = cleanPath(val);
+        if (cleaned) links.push({ original: val, cleaned });
     }
 }
 while ((match = scriptRegex.exec(html)) !== null) {
-    if (!match[1].startsWith('http')) {
-        scripts.push(match[1]);
+    const val = match[1];
+    if (!val.startsWith('http')) {
+        const cleaned = cleanPath(val);
+        if (cleaned) scripts.push({ original: val, cleaned });
     }
 }
 
 console.log('Checking local links:');
+let hasErrors = false;
 links.forEach(l => {
-    const fullPath = path.join(baseDir, l);
+    const fullPath = path.join(baseDir, l.cleaned);
     if (fs.existsSync(fullPath)) {
-        console.log(`✅ LINK EXISTS: ${l}`);
+        console.log(`✅ LINK EXISTS: ${l.original}`);
     } else {
-        console.error(`❌ LINK MISSING: ${l}`);
+        console.error(`❌ LINK MISSING: ${l.original} (cleaned: ${l.cleaned})`);
+        hasErrors = true;
     }
 });
 
 console.log('Checking local scripts:');
 scripts.forEach(s => {
-    const fullPath = path.join(baseDir, s);
+    const fullPath = path.join(baseDir, s.cleaned);
     if (fs.existsSync(fullPath)) {
-        console.log(`✅ SCRIPT EXISTS: ${s}`);
+        console.log(`✅ SCRIPT EXISTS: ${s.original}`);
     } else {
-        console.error(`❌ SCRIPT MISSING: ${s}`);
+        console.error(`❌ SCRIPT MISSING: ${s.original} (cleaned: ${s.cleaned})`);
+        hasErrors = true;
     }
 });
+
+if (hasErrors) {
+    process.exit(1);
+} else {
+    console.log('\n🎉 All local references are valid!');
+}
+
