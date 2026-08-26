@@ -3,7 +3,7 @@ const CONFIG = {
     scrollDuration: 1.2,
     loaderMinTime: 800,
     seasonStart: "2026-08-08",
-    seasonEnd: "2027-05-20"
+    seasonEnd: "2027-05-22"
 };
 
 // --- INITIALISATION ---
@@ -486,7 +486,7 @@ function initStats() {
     const text = document.getElementById('season-percent-text');
     if (bar && text) {
         const start = new Date(CONFIG.seasonStart || "2026-08-08").getTime();
-        const end = new Date(CONFIG.seasonEnd || "2027-05-20").getTime();
+        const end = new Date(CONFIG.seasonEnd || "2027-05-22").getTime();
         const now = new Date().getTime();
 
         let pct = ((now - start) / (end - start)) * 100;
