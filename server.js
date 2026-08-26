@@ -321,36 +321,62 @@ app.post('/api/optimize', async (req, res) => {
     }
 });
 
-// Deploy to GitHub - async version with proper PowerShell
+// Deploy to GitHub - async version with proper error handling and multi-branch push
 app.post('/api/deploy', async (req, res) => {
     const message = req.body.message || 'Mise à jour portfolio via admin';
 
     try {
         console.log('Starting deployment...');
+        let output = '';
 
-        // Execute git commands one by one
+        // 1. Pull / rebase from remote to avoid non-fast-forward push rejection
+        try {
+            const pull = await execPromise('git pull --rebase origin main', { cwd: __dirname });
+            console.log('Git pull:', pull.stdout);
+            output += (pull.stdout || '') + '\n';
+        } catch (pullErr) {
+            console.warn('Git pull warning:', pullErr.message);
+        }
+
+        // 2. Git add
         const add = await execPromise('git add .', { cwd: __dirname });
         console.log('Git add:', add.stdout);
+        output += (add.stdout || '') + '\n';
 
-        const commit = await execPromise(`git commit -m "${message}"`, { cwd: __dirname });
-        console.log('Git commit:', commit.stdout);
+        // 3. Check if there are changes to commit
+        const status = await execPromise('git status --porcelain', { cwd: __dirname });
+        if (status.stdout.trim().length > 0) {
+            const commit = await execPromise(`git commit -m "${message.replace(/"/g, '\\"')}"`, { cwd: __dirname });
+            console.log('Git commit:', commit.stdout);
+            output += (commit.stdout || '') + '\n';
+        } else {
+            output += 'Rien à commiter (arbre de travail propre).\n';
+        }
 
-        const push = await execPromise('git push origin main', { cwd: __dirname });
-        console.log('Git push:', push.stdout);
+        // 4. Push to both main and main-archive-images so both GitHub and Vercel are always up to date
+        const pushMain = await execPromise('git push origin main', { cwd: __dirname });
+        console.log('Git push main:', pushMain.stdout || pushMain.stderr);
+        output += (pushMain.stdout || pushMain.stderr || '') + '\n';
+
+        try {
+            const pushArchive = await execPromise('git push origin main:main-archive-images', { cwd: __dirname });
+            console.log('Git push main-archive-images:', pushArchive.stdout || pushArchive.stderr);
+            output += (pushArchive.stdout || pushArchive.stderr || '') + '\n';
+        } catch (archiveErr) {
+            console.warn('Push to main-archive-images warning:', archiveErr.message);
+        }
 
         res.json({
             success: true,
-            output: `${add.stdout}\n${commit.stdout}\n${push.stdout}`
+            output: output.trim() || 'Déploiement terminé avec succès.'
         });
     } catch (error) {
         console.error('Deploy error:', error);
-
-        // Sometimes git returns exit code 1 even on success
-        const output = (error.stdout || '') + '\n' + (error.stderr || '');
-
-        res.json({
-            success: true, // Consider it success if we got output
-            output: output || error.message
+        res.status(500).json({
+            success: false,
+            error: error.message,
+            stdout: error.stdout || '',
+            stderr: error.stderr || ''
         });
     }
 });
