@@ -353,10 +353,18 @@ app.post('/api/deploy', async (req, res) => {
             output += 'Rien à commiter (arbre de travail propre).\n';
         }
 
-        // 4. Push to main
+        // 4. Push to main and sync main-archive-images for Vercel
         const pushMain = await execPromise('git push origin main', { cwd: __dirname });
         console.log('Git push main:', pushMain.stdout || pushMain.stderr);
         output += (pushMain.stdout || pushMain.stderr || '') + '\n';
+
+        try {
+            const pushArchive = await execPromise('git push origin main:main-archive-images', { cwd: __dirname });
+            console.log('Git push main-archive-images:', pushArchive.stdout || pushArchive.stderr);
+            output += (pushArchive.stdout || pushArchive.stderr || '') + '\n';
+        } catch (archiveErr) {
+            console.warn('Push main-archive-images warning:', archiveErr.message);
+        }
 
         res.json({
             success: true,
