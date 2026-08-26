@@ -2229,9 +2229,45 @@ body.fast-load .hero .btn {
     font-weight: 800;
 }
 
+.bg-prepa {
+    background: linear-gradient(45deg, #d35400, #f39c12);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(243, 156, 18, 0.5);
+    font-weight: 800;
+}
+
+.badge-prepa {
+    background: linear-gradient(135deg, #d35400, #f39c12);
+    color: #fff;
+    border: 1px solid #f39c12;
+    box-shadow: 0 0 10px rgba(243, 156, 18, 0.4);
+    padding: 5px 12px;
+}
+
 .bg-u19 {
     background: var(--primary);
     color: #fff;
+}
+
+.club-bubble-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.club-bubble-note {
+    font-size: 0.62rem;
+    color: #00aaff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: rgba(0, 170, 255, 0.12);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 170, 255, 0.25);
+    white-space: nowrap;
 }
 
 /* --- RESPONSIVE MOBILE & TABLETTE (Correction Finale Taille & Débordement) --- */

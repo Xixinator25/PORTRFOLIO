@@ -16,12 +16,17 @@
     "logo": "images/logos/ligue_2.png",
     "clubs": [
       {
-        "name": "Le Mans FC (en Ligue 2)",
-        "logo": "images/logos/LEMANSFC.png"
+        "name": "Le Mans FC",
+        "logo": "images/logos/LEMANSFC.png",
+        "note": "en L2"
       },
       {
         "name": "Clermont Foot",
         "logo": "images/logos/CLERMONTFOOT.png"
+      },
+      {
+        "name": "FC Metz",
+        "logo": "images/logos/fcmetz.png"
       }
     ]
   },

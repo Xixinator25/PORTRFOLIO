@@ -44,13 +44,21 @@ function generateAlbums() {
                 if (rest.includes('_')) {
                      // Try to split by first underscore to find category
                      // Or just separate known prefixes
-                     if (rest.startsWith('N1_')) {
-                        category = "NATIONAL 1";
-                        rest = rest.substring(3).replace(/_/g, ' '); // Remove prefix and replace remaining underscores with spaces
+                     if (rest.startsWith('PREPA_') || rest.startsWith('AMICAL_')) {
+                        category = "PRÉPARATION L2";
+                        rest = rest.replace(/^(PREPA_|AMICAL_)/, '').replace(/_/g, ' ');
                      }
-                     else if (rest.startsWith('N3_')) {
-                        category = "NATIONAL 3";
+                     else if (rest.startsWith('L2_')) {
+                        category = "LIGUE 2";
                         rest = rest.substring(3).replace(/_/g, ' ');
+                     }
+                     else if (rest.startsWith('L3_') || rest.startsWith('N1_')) {
+                        category = "LIGUE 3";
+                        rest = rest.replace(/^(L3_|N1_)/, '').replace(/_/g, ' ');
+                     }
+                     else if (rest.startsWith('N2_') || rest.startsWith('N3_')) {
+                        category = "NATIONAL 2";
+                        rest = rest.replace(/^(N2_|N3_)/, '').replace(/_/g, ' ');
                      }
                      else if (rest.startsWith('COUPE_')) {
                         category = "COUPE DE FRANCE";

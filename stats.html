@@ -394,8 +394,11 @@
                             : `<i class="${div.logo}"></i>`;
 
                         let clubsHtml = div.clubs.map(c => `
-                            <div class="club-bubble" title="${c.name}">
-                                <img src="${c.logo}" alt="${c.name}" onerror="this.parentElement.style.display='none'">
+                            <div class="club-bubble-wrapper">
+                                <div class="club-bubble" title="${c.name}">
+                                    <img src="${c.logo}" alt="${c.name}" onerror="this.parentElement.style.display='none'">
+                                </div>
+                                ${c.note ? `<span class="club-bubble-note">${c.note}</span>` : ''}
                             </div>
                         `).join('');
 
