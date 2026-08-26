@@ -305,17 +305,20 @@ function renderAlbums(albums) {
         div.style.transitionDelay = `${(idx + 1) * 0.05}s`;
         div.style.display = 'block';
 
-        const isLigue2 = album.category.toUpperCase().includes('LIGUE 2') && !album.category.toUpperCase().includes('PRÉPARATION') && !album.category.toUpperCase().includes('PREPA');
-        const isPrepa = album.category.toUpperCase().includes('PRÉPARATION') || album.category.toUpperCase().includes('PREPA') || album.category.toUpperCase().includes('AMICAL');
-        const isCoupe = album.category.toUpperCase().includes('COUPE');
+        const cat = (album.category || '').toUpperCase();
+        const catNorm = cat.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+        const isPrepa = catNorm.includes('PREPA') || catNorm.includes('AMICAL');
+        const isLigue2 = catNorm.includes('LIGUE 2') && !isPrepa;
+        const isCoupe = catNorm.includes('COUPE');
 
         let specialBadge = '';
         if (isLigue2) {
-            specialBadge = `<div class="badge-l2" style="position: absolute; top: 20px; right: 20px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1px;">PRO : LIGUE 2</div>`;
+            specialBadge = `<div class="badge-l2" style="position: absolute; top: 18px; right: 18px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.75rem; letter-spacing: 1px; padding: 6px 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">PRO : LIGUE 2</div>`;
         } else if (isPrepa) {
-            specialBadge = `<div class="badge-prepa" style="position: absolute; top: 20px; right: 20px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1px;">PRÉPA L2</div>`;
+            specialBadge = `<div class="badge-prepa" style="position: absolute; top: 18px; right: 18px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.75rem; letter-spacing: 1px; padding: 6px 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">PRÉPA L2</div>`;
         } else if (isCoupe) {
-            specialBadge = `<div class="badge-cup" style="position: absolute; top: 20px; right: 20px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1px; padding: 4px 8px; font-weight: 700;">COUPE DE FRANCE</div>`;
+            specialBadge = `<div class="badge-cup" style="position: absolute; top: 18px; right: 18px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.75rem; letter-spacing: 1px; padding: 6px 12px; font-weight: 700; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">COUPE DE FRANCE</div>`;
         }
 
         // Generate ID for link: favor album.id, fallback to slugified title

@@ -800,6 +800,7 @@ body.fast-load .hero .btn {
 }
 
 .photo-card {
+    position: relative;
     height: 420px;
     cursor: pointer;
     overflow: hidden;
