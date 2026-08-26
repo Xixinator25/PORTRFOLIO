@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             const note = document.getElementById('evolution-chart-note');
 
             if (season === '2025-2026') {
-                const data2526 = statsData.seasonEvolution.season2025_2026 || [1, 3, 2, 4, 0, 3, 3, 5, 5, 6];
+                const data2526 = statsData.seasonEvolution.season2025_2026 || [0, 1, 3, 2, 4, 0, 3, 3, 5, 5, 6];
                 window.evolutionChartInstance.data.datasets[0].data = data2526;
                 window.evolutionChartInstance.update();
 
@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 if (btn2627) btn2627.classList.remove('active');
                 if (note) note.innerText = 'Saison 2025-2026 terminée (32 matchs)';
             } else {
-                const data2627 = statsData.seasonEvolution.season2026_2027 || statsData.seasonEvolution.values || [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                const data2627 = statsData.seasonEvolution.season2026_2027 || statsData.seasonEvolution.values || [2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
                 window.evolutionChartInstance.data.datasets[0].data = data2627;
                 window.evolutionChartInstance.update();
 

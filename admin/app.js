@@ -315,17 +315,21 @@ function renderStatsForm() {
     document.getElementById('comp-other').value = compValues[5] || 0;
 
     // Season Evolution
-    const monthValues = statsData.seasonEvolution.values;
-    document.getElementById('month-aug').value = monthValues[0];
-    document.getElementById('month-sep').value = monthValues[1];
-    document.getElementById('month-oct').value = monthValues[2];
-    document.getElementById('month-nov').value = monthValues[3];
-    document.getElementById('month-dec').value = monthValues[4];
-    document.getElementById('month-jan').value = monthValues[5];
-    document.getElementById('month-feb').value = monthValues[6] || 0;
-    document.getElementById('month-mar').value = monthValues[7] || 0;
-    document.getElementById('month-apr').value = monthValues[8] || 0;
-    document.getElementById('month-may').value = monthValues[9] || 0;
+    const monthValues = statsData.seasonEvolution.values || [];
+    const hasJul = (statsData.seasonEvolution.labels && statsData.seasonEvolution.labels[0] === "Juil") || monthValues.length === 11;
+    const offset = hasJul ? 1 : 0;
+
+    document.getElementById('month-jul').value = hasJul ? (monthValues[0] || 0) : 0;
+    document.getElementById('month-aug').value = monthValues[offset + 0] || 0;
+    document.getElementById('month-sep').value = monthValues[offset + 1] || 0;
+    document.getElementById('month-oct').value = monthValues[offset + 2] || 0;
+    document.getElementById('month-nov').value = monthValues[offset + 3] || 0;
+    document.getElementById('month-dec').value = monthValues[offset + 4] || 0;
+    document.getElementById('month-jan').value = monthValues[offset + 5] || 0;
+    document.getElementById('month-feb').value = monthValues[offset + 6] || 0;
+    document.getElementById('month-mar').value = monthValues[offset + 7] || 0;
+    document.getElementById('month-apr').value = monthValues[offset + 8] || 0;
+    document.getElementById('month-may').value = monthValues[offset + 9] || 0;
 
     // Photo Types
     const typeValues = statsData.photoTypes.values;
@@ -735,7 +739,11 @@ saveAllBtn.onclick = async () => {
             parseInt(document.getElementById('comp-other').value) || 0
         ];
 
+        statsData.seasonEvolution.labels = [
+            "Juil", "Août", "Sept", "Oct", "Nov", "Déc", "Jan", "Fév", "Mars", "Avr", "Mai"
+        ];
         statsData.seasonEvolution.values = [
+            parseInt(document.getElementById('month-jul').value) || 0,
             parseInt(document.getElementById('month-aug').value) || 0,
             parseInt(document.getElementById('month-sep').value) || 0,
             parseInt(document.getElementById('month-oct').value) || 0,
