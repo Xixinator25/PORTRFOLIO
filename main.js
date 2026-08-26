@@ -305,8 +305,18 @@ function renderAlbums(albums) {
         div.style.transitionDelay = `${(idx + 1) * 0.05}s`;
         div.style.display = 'block';
 
-        const isLigue2 = album.category.toUpperCase().includes('LIGUE 2');
-        const specialBadge = isLigue2 ? `<div class="badge-l2" style="position: absolute; top: 20px; right: 20px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1px;">PRO : LIGUE 2</div>` : '';
+        const isLigue2 = album.category.toUpperCase().includes('LIGUE 2') && !album.category.toUpperCase().includes('PRÉPARATION') && !album.category.toUpperCase().includes('PREPA');
+        const isPrepa = album.category.toUpperCase().includes('PRÉPARATION') || album.category.toUpperCase().includes('PREPA') || album.category.toUpperCase().includes('AMICAL');
+        const isCoupe = album.category.toUpperCase().includes('COUPE');
+
+        let specialBadge = '';
+        if (isLigue2) {
+            specialBadge = `<div class="badge-l2" style="position: absolute; top: 20px; right: 20px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1px;">PRO : LIGUE 2</div>`;
+        } else if (isPrepa) {
+            specialBadge = `<div class="badge-prepa" style="position: absolute; top: 20px; right: 20px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1px;">PRÉPA L2</div>`;
+        } else if (isCoupe) {
+            specialBadge = `<div class="badge-cup" style="position: absolute; top: 20px; right: 20px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1px; padding: 4px 8px; font-weight: 700;">COUPE DE FRANCE</div>`;
+        }
 
         // Generate ID for link: favor album.id, fallback to slugified title
         const slugify = text => text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');

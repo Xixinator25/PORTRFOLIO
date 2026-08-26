@@ -98,6 +98,37 @@ async function loadData() {
     }
 }
 
+// Smart Folder Change logic
+document.getElementById('album-folder').onchange = (e) => {
+    const folder = e.target.value;
+    if (!folder) return;
+
+    let clean = folder.replace(/^\d{4}-\d{2}-\d{2}_/, '');
+    const catSelect = document.getElementById('album-category');
+    const titleInput = document.getElementById('album-title');
+
+    if (clean.startsWith('PREPA_') || clean.startsWith('AMICAL_')) {
+        catSelect.value = 'PRÉPARATION L2';
+        clean = clean.replace(/^(PREPA_|AMICAL_)/, '');
+    } else if (clean.startsWith('L2_')) {
+        catSelect.value = 'LIGUE 2';
+        clean = clean.replace(/^L2_/, '');
+    } else if (clean.startsWith('L3_') || clean.startsWith('N1_')) {
+        catSelect.value = 'LIGUE 3';
+        clean = clean.replace(/^(L3_|N1_)/, '');
+    } else if (clean.startsWith('N2_') || clean.startsWith('N3_')) {
+        catSelect.value = 'NATIONAL 2';
+        clean = clean.replace(/^(N2_|N3_)/, '');
+    } else if (clean.startsWith('COUPE_')) {
+        catSelect.value = 'COUPE DE FRANCE';
+        clean = clean.replace(/^COUPE_/, '');
+    }
+
+    if (!titleInput.value || titleInput.value.trim() === '') {
+        titleInput.value = clean.replace(/_/g, ' ');
+    }
+};
+
 // Auto-scan logic
 document.getElementById('scan-folder-btn').onclick = async () => {
     const folder = document.getElementById('album-folder').value;
@@ -112,6 +143,10 @@ document.getElementById('scan-folder-btn').onclick = async () => {
 
         if (res.ok) {
             document.getElementById('album-images').value = data.join('\n');
+            const coverInput = document.getElementById('album-cover');
+            if ((!coverInput.value || coverInput.value.trim() === '') && data.length > 0) {
+                coverInput.value = data[0];
+            }
             alert(`${data.length} images trouvées et ajoutées !`);
         } else {
             alert('Erreur lors du scan: ' + (data.error || 'Erreur inconnue'));
@@ -323,7 +358,23 @@ function openEditModal(index) {
 
     document.getElementById('modal-title').innerText = "Modifier l'Album";
     document.getElementById('album-title').value = album.title;
-    document.getElementById('album-category').value = album.category;
+    
+    const catSelect = document.getElementById('album-category');
+    if (catSelect) {
+        const existingOpt = Array.from(catSelect.options).find(o => o.value.trim().toUpperCase() === (album.category || '').trim().toUpperCase());
+        if (existingOpt) {
+            catSelect.value = existingOpt.value;
+        } else if (album.category) {
+            const customOpt = document.createElement('option');
+            customOpt.value = album.category;
+            customOpt.innerText = album.category;
+            catSelect.appendChild(customOpt);
+            catSelect.value = album.category;
+        } else {
+            catSelect.value = "";
+        }
+    }
+
     document.getElementById('album-cover').value = album.cover;
     document.getElementById('album-images').value = album.images.join('\n');
 
@@ -696,6 +747,8 @@ saveAllBtn.onclick = async () => {
             parseInt(document.getElementById('month-apr').value) || 0,
             parseInt(document.getElementById('month-may').value) || 0
         ];
+        statsData.seasonEvolution.season2026_2027 = [...statsData.seasonEvolution.values];
+        statsData.competitionDistribution.labels = ["Ligue 1", "Ligue 2", "Ligue 3 (ex-N1)", "National 2 (ex-N3)", "Coupe de France", "U19 / Autres"];
 
         statsData.photoTypes.values = [
             parseInt(document.getElementById('type-action').value) || 0,

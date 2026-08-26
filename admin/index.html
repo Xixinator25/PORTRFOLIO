@@ -96,11 +96,11 @@
                         <input type="number" id="comp-l2" min="0" value="0">
                     </div>
                     <div class="form-group">
-                        <label>National 1</label>
+                        <label>Ligue 3 (ex-N1)</label>
                         <input type="number" id="comp-n1" min="0" value="0">
                     </div>
                     <div class="form-group">
-                        <label>National 3</label>
+                        <label>National 2 (ex-N3)</label>
                         <input type="number" id="comp-n3" min="0" value="0">
                     </div>
                     <div class="form-group">
@@ -116,7 +116,7 @@
 
             <!-- Season Evolution -->
             <div class="stats-editor-section">
-                <h3><i class="fas fa-chart-line"></i> Évolution Saison 2025-2026</h3>
+                <h3><i class="fas fa-chart-line"></i> Évolution Saison 2026-2027</h3>
                 <div class="form-grid">
                     <div class="form-group">
                         <label>Août</label>
@@ -397,7 +397,21 @@
 
                 <div class="form-group">
                     <label>Catégorie</label>
-                    <input type="text" id="album-category" required>
+                    <select id="album-category"
+                        style="width: 100%; padding: 0.8rem; background: var(--bg-dark); border: 1px solid var(--border-color); color: #fff; border-radius: 8px;"
+                        required>
+                        <option value="">Sélectionner une catégorie...</option>
+                        <option value="PRÉPARATION L2">⚽ PRÉPARATION L2 (Badge : Prépa L2)</option>
+                        <option value="LIGUE 2">🏆 LIGUE 2 (Badge : Pro Ligue 2)</option>
+                        <option value="LIGUE 3">🥇 LIGUE 3 (ex-N1)</option>
+                        <option value="NATIONAL 1">NATIONAL 1</option>
+                        <option value="NATIONAL 2">NATIONAL 2 (ex-N3)</option>
+                        <option value="NATIONAL 3">NATIONAL 3</option>
+                        <option value="COUPE DE FRANCE">🎖️ COUPE DE FRANCE (Badge : Coupe)</option>
+                        <option value="FORMATION">⭐ FORMATION / U19</option>
+                        <option value="RÉGIONAL">📍 RÉGIONAL</option>
+                        <option value="REPORTAGE">📸 REPORTAGE / AUTRE</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
