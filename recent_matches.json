@@ -5,8 +5,8 @@
             "homeTeam": "FCSM",
             "awayTeam": "FC METZ",
             "date": "2026-07-22",
-            "competition": "Ligue 2",
-            "competitionBadge": "badge-l2",
+            "competition": "Prépa L2",
+            "competitionBadge": "badge-prepa",
             "homeLogo": "images/logos/fcsm.png",
             "awayLogo": "images/logos/fcmetz.png",
             "albumId": "2026-08-26_fcsm-vs-fc-metz"
@@ -16,7 +16,7 @@
             "homeTeam": "FCSM",
             "awayTeam": "LE PUY FOOT",
             "date": "2026-05-26",
-            "competition": "NATIONAL 1",
+            "competition": "Ligue 3 (ex-N1)",
             "competitionBadge": "badge-n1",
             "homeLogo": "images/logos/fcsm.png",
             "awayLogo": "images/logos/Logo_Puy_Foot_43_Auvergne_2017.svg",
@@ -28,7 +28,7 @@
             "awayTeam": "Clermont Foot",
             "date": "2026-04-17",
             "competition": "Ligue 2",
-            "competitionBadge": "badge-reg",
+            "competitionBadge": "badge-l2",
             "homeLogo": "images/logos/LEMANSFC.png",
             "awayLogo": "images/logos/CLERMONTFOOT.png",
             "albumId": "2026-05-14_le-mans-fc-vs-clermont-foot"

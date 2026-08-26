@@ -1812,6 +1812,15 @@ body.fast-load .hero .btn {
         position: relative;
     }
 
+    .badge-prepa {
+        background: linear-gradient(135deg, #d35400, #f39c12);
+        color: #fff;
+        border: 1px solid #f39c12;
+        box-shadow: 0 0 10px rgba(243, 156, 18, 0.4);
+        padding: 5px 12px;
+        position: relative;
+    }
+
     .pass-badge {
         display: inline-flex;
         align-items: center;
