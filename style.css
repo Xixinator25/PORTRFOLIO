@@ -1754,6 +1754,12 @@ body.fast-load .hero .btn {
         font-size: 0.95rem;
     }
 
+    .data-table th:first-child,
+    .data-table td:first-child {
+        min-width: 130px;
+        white-space: nowrap;
+    }
+
     .data-table tr:last-child td {
         border-bottom: none;
     }
@@ -1770,6 +1776,9 @@ body.fast-load .hero .btn {
         text-transform: uppercase;
         font-family: 'Oswald', sans-serif;
         letter-spacing: 1px;
+        white-space: nowrap;
+        display: inline-block;
+        text-align: center;
     }
 
     .badge-n1 {
