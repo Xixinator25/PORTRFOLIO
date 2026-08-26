@@ -12,26 +12,26 @@
             "albumId": "2026-08-26_fcsm-vs-le-puy-foot"
         },
         {
+            "id": 1787771520345,
+            "homeTeam": "FCSM",
+            "awayTeam": "VAFC",
+            "date": "2026-05-02",
+            "competition": "National 1",
+            "competitionBadge": "badge-n1",
+            "homeLogo": "images/logos/fcsm.png",
+            "awayLogo": "images/logos/VAFC.png",
+            "albumId": "2026-05-14_fcsm-vs-vafc"
+        },
+        {
             "id": 1787771520344,
             "homeTeam": "Le Mans FC",
             "awayTeam": "Clermont Foot",
             "date": "2026-04-17",
             "competition": "Ligue 2",
-            "competitionBadge": "badge-reg",
+            "competitionBadge": "badge-l2",
             "homeLogo": "images/logos/LEMANSFC.png",
             "awayLogo": "images/logos/CLERMONTFOOT.png",
             "albumId": "2026-05-14_le-mans-fc-vs-clermont-foot"
-        },
-        {
-            "id": 1787771520345,
-            "homeTeam": "FCSM",
-            "awayTeam": "VAFC",
-            "date": "2026-05-02",
-            "competition": "NATIONAL 1",
-            "competitionBadge": "badge-n1",
-            "homeLogo": "images/logos/fcsm.png",
-            "awayLogo": "images/logos/VAFC.png",
-            "albumId": "2026-05-14_fcsm-vs-vafc"
         }
     ]
 }

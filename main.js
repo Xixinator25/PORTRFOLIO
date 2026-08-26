@@ -2,8 +2,8 @@
 const CONFIG = {
     scrollDuration: 1.2,
     loaderMinTime: 800,
-    seasonStart: "2025-08-08",
-    seasonEnd: "2026-05-15"
+    seasonStart: "2026-08-08",
+    seasonEnd: "2027-05-20"
 };
 
 // --- INITIALISATION ---

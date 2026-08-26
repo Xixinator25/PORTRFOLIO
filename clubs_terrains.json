@@ -26,8 +26,8 @@
     ]
   },
   {
-    "id": "nat",
-    "name": "National 1/2/3",
+    "id": "l3",
+    "name": "Ligue 3 (ex-N1)",
     "logo": "images/logos/Championnat_National.png",
     "clubs": [
       {
@@ -82,6 +82,17 @@
         "name": "Stade Briochin",
         "logo": "images/logos/Logo_Stade_Briochin.png"
       },
+      {
+        "name": "Le Puy Foot 43",
+        "logo": "images/logos/Logo_Puy_Foot_43_Auvergne_2017.svg"
+      }
+    ]
+  },
+  {
+    "id": "nat",
+    "name": "National (ex-N2/N3)",
+    "logo": "fa-solid fa-shield-halved",
+    "clubs": [
       {
         "name": "ASM Belfort",
         "logo": "images/logos/asmbelfort.png"
