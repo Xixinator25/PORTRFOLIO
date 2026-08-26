@@ -4,7 +4,7 @@
       "Ligue 1",
       "Ligue 2",
       "Ligue 3 (ex-N1)",
-      "National (ex-N3)",
+      "National 2 (ex-N3)",
       "Coupe de France",
       "U19 / Autres"
     ],
@@ -29,6 +29,30 @@
       "Mars",
       "Avr",
       "Mai"
+    ],
+    "season2026_2027": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "season2025_2026": [
+      1,
+      3,
+      2,
+      4,
+      0,
+      3,
+      3,
+      5,
+      5,
+      6
     ],
     "values": [
       0,

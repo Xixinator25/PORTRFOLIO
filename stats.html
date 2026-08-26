@@ -11,7 +11,7 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Oswald:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css?v=7">
+    <link rel="stylesheet" href="style.css?v=8">
     <link rel="icon" href="favicon.png" type="image/png">
 </head>
 
@@ -229,8 +229,8 @@
                                 PRESSE</span></td>
                     </tr>
                     <tr>
-                        <td><span class="badge badge-n3">National 3</span></td>
-                        <td>Champ. N3</td>
+                        <td><span class="badge badge-n3">National 2</span></td>
+                        <td>Champ. National 2 (ex-N3)</td>
                         <td>
                             <span class="table-club-name">FCSM, ASM Belfort</span>
                             <span class="table-sub-text">-</span>
@@ -275,10 +275,15 @@
                 </div>
 
                 <div class="chart-container">
-                    <h3><i class="fa-solid fa-chart-line" style="margin-right: 10px;"></i>Évolution Saison 2026-2027
-                    </h3>
+                    <div class="chart-header-row">
+                        <h3><i class="fa-solid fa-chart-line" style="margin-right: 10px;"></i>Évolution Mensuelle</h3>
+                        <div class="season-selector-tabs">
+                            <button id="btn-season-2627" class="season-tab-btn active" onclick="switchEvolutionSeason('2026-2027')">2026-2027</button>
+                            <button id="btn-season-2526" class="season-tab-btn" onclick="switchEvolutionSeason('2025-2026')">2025-2026</button>
+                        </div>
+                    </div>
                     <canvas id="evolutionChart"></canvas>
-                    <p class="chart-note">Croissance régulière d'activité</p>
+                    <p class="chart-note" id="evolution-chart-note">Saison 2026-2027 en cours</p>
                 </div>
 
                 <div class="chart-container">
@@ -446,8 +451,8 @@
 
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-    <script src="main.js?v=6"></script>
-    <script src="charts.js?v=6"></script>
+    <script src="main.js?v=8"></script>
+    <script src="charts.js?v=8"></script>
 </body>
 
 </html>

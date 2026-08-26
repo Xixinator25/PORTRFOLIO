@@ -134,13 +134,17 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Evolution Chart (Line Chart)
     const evolutionCtx = document.getElementById('evolutionChart');
     if (evolutionCtx) {
-        new Chart(evolutionCtx, {
+        const initialData = (statsData.seasonEvolution && statsData.seasonEvolution.season2026_2027) 
+            ? statsData.seasonEvolution.season2026_2027 
+            : statsData.seasonEvolution.values;
+
+        window.evolutionChartInstance = new Chart(evolutionCtx, {
             type: 'line',
             data: {
                 labels: statsData.seasonEvolution.labels,
                 datasets: [{
                     label: 'Matchs par mois',
-                    data: statsData.seasonEvolution.values,
+                    data: initialData,
                     borderColor: primaryColor,
                     backgroundColor: 'rgba(233, 69, 96, 0.1)',
                     borderWidth: 3,
@@ -178,7 +182,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     y: {
                         beginAtZero: true,
                         ticks: {
-                            stepSize: 2,
+                            stepSize: 1,
                             color: '#888'
                         },
                         grid: {
@@ -196,12 +200,38 @@ document.addEventListener('DOMContentLoaded', async function () {
                     }
                 },
                 animation: {
-                    duration: 1500,
-                    easing: 'easeInOutQuart',
-                    delay: 300
+                    duration: 1200,
+                    easing: 'easeInOutQuart'
                 }
             }
         });
+
+        // Function to toggle between seasons
+        window.switchEvolutionSeason = function (season) {
+            if (!window.evolutionChartInstance || !statsData.seasonEvolution) return;
+
+            const btn2627 = document.getElementById('btn-season-2627');
+            const btn2526 = document.getElementById('btn-season-2526');
+            const note = document.getElementById('evolution-chart-note');
+
+            if (season === '2025-2026') {
+                const data2526 = statsData.seasonEvolution.season2025_2026 || [1, 3, 2, 4, 0, 3, 3, 5, 5, 6];
+                window.evolutionChartInstance.data.datasets[0].data = data2526;
+                window.evolutionChartInstance.update();
+
+                if (btn2526) btn2526.classList.add('active');
+                if (btn2627) btn2627.classList.remove('active');
+                if (note) note.innerText = 'Saison 2025-2026 terminée (32 matchs)';
+            } else {
+                const data2627 = statsData.seasonEvolution.season2026_2027 || statsData.seasonEvolution.values || [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                window.evolutionChartInstance.data.datasets[0].data = data2627;
+                window.evolutionChartInstance.update();
+
+                if (btn2627) btn2627.classList.add('active');
+                if (btn2526) btn2526.classList.remove('active');
+                if (note) note.innerText = 'Saison 2026-2027 en cours';
+            }
+        };
     }
 
     // Photo Types Chart (Doughnut Chart)

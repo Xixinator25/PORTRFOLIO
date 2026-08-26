@@ -485,8 +485,8 @@ function initStats() {
     const bar = document.getElementById('season-bar');
     const text = document.getElementById('season-percent-text');
     if (bar && text) {
-        const start = new Date(CONFIG.seasonStart).getTime();
-        const end = new Date(CONFIG.seasonEnd).getTime();
+        const start = new Date(CONFIG.seasonStart || "2026-08-08").getTime();
+        const end = new Date(CONFIG.seasonEnd || "2027-05-20").getTime();
         const now = new Date().getTime();
 
         let pct = ((now - start) / (end - start)) * 100;
@@ -494,13 +494,19 @@ function initStats() {
 
         setTimeout(() => {
             bar.style.width = pct + "%";
-            let i = 0;
+            let current = 0;
+            const target = pct;
+            const step = Math.max(0.1, target / 30);
             const counter = setInterval(() => {
-                text.innerText = i + "%";
-                if (i >= Math.floor(pct)) { clearInterval(counter); text.innerText = pct.toFixed(1) + "%"; }
-                i++;
-            }, 20);
-        }, 500);
+                current += step;
+                if (current >= target) {
+                    clearInterval(counter);
+                    text.innerText = target.toFixed(1) + "%";
+                } else {
+                    text.innerText = current.toFixed(1) + "%";
+                }
+            }, 25);
+        }, 300);
     }
 }
 
