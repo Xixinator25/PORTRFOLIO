@@ -265,8 +265,35 @@ async function initGallery() {
     }
 }
 
+function getAlbumCategoryKey(cat) {
+    const catNorm = (cat || '').toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    if (catNorm.includes('PREPA') || catNorm.includes('AMICAL')) return 'prepa';
+    if (catNorm.includes('LIGUE 2')) return 'l2';
+    if (catNorm.includes('LIGUE 3') || catNorm.includes('NATIONAL 1') || catNorm.includes('N1')) return 'l3';
+    if (catNorm.includes('NATIONAL 2') || catNorm.includes('NATIONAL 3') || catNorm.includes('N2') || catNorm.includes('N3')) return 'n2';
+    if (catNorm.includes('COUPE')) return 'cup';
+    return 'other';
+}
+
 function initFilters() {
-    const buttons = document.querySelectorAll('.filter-btn');
+    const buttons = document.querySelectorAll('.album-filter-btn, .filter-btn');
+    if (!buttons || buttons.length === 0) return;
+
+    // Calculate dynamic counts
+    const counts = {
+        all: allAlbumsData.length,
+        l2: allAlbumsData.filter(a => getAlbumCategoryKey(a.category) === 'l2').length,
+        l3: allAlbumsData.filter(a => getAlbumCategoryKey(a.category) === 'l3').length,
+        prepa: allAlbumsData.filter(a => getAlbumCategoryKey(a.category) === 'prepa').length,
+        cup: allAlbumsData.filter(a => getAlbumCategoryKey(a.category) === 'cup').length
+    };
+
+    // Update count labels
+    Object.keys(counts).forEach(key => {
+        const el = document.getElementById(`count-${key}`);
+        if (el) el.innerText = counts[key];
+    });
+
     buttons.forEach(btn => {
         btn.addEventListener('click', () => {
             // Update active state
@@ -278,9 +305,7 @@ function initFilters() {
             if (filter === 'all') {
                 renderAlbums(allAlbumsData);
             } else {
-                const filtered = allAlbumsData.filter(album =>
-                    album.category.toUpperCase().includes(filter.toUpperCase())
-                );
+                const filtered = allAlbumsData.filter(album => getAlbumCategoryKey(album.category) === filter);
                 renderAlbums(filtered);
             }
         });

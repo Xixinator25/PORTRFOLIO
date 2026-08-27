@@ -856,6 +856,104 @@ body.fast-load .hero .btn {
     color: #ccc;
 }
 
+/* --- ALBUM FILTERS --- */
+.album-filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 0 auto 3rem auto;
+    max-width: 1000px;
+    padding: 0 1rem;
+}
+
+.album-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.65rem 1.3rem;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #aaa;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    backdrop-filter: blur(10px);
+}
+
+.album-filter-btn i {
+    font-size: 0.85rem;
+    transition: transform 0.3s ease;
+}
+
+.album-filter-btn .filter-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #bbb;
+    margin-left: 2px;
+    transition: all 0.3s ease;
+}
+
+.album-filter-btn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.album-filter-btn:hover i {
+    transform: scale(1.15);
+}
+
+.album-filter-btn.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+    box-shadow: 0 0 20px rgba(233, 69, 96, 0.4);
+    transform: translateY(-2px);
+}
+
+.album-filter-btn.active .filter-count {
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+}
+
+.album-filter-btn[data-filter="l2"].active {
+    background: linear-gradient(135deg, #003366, #0059b3);
+    border-color: #00aaff;
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.4);
+}
+
+.album-filter-btn[data-filter="prepa"].active {
+    background: linear-gradient(135deg, #d35400, #f39c12);
+    border-color: #f39c12;
+    box-shadow: 0 0 20px rgba(243, 156, 18, 0.4);
+}
+
+.album-filter-btn[data-filter="cup"].active {
+    background: linear-gradient(135deg, #b8860b, #E9B109);
+    border-color: #ffd700;
+    color: #000;
+    box-shadow: 0 0 20px rgba(233, 177, 9, 0.4);
+}
+
+.album-filter-btn[data-filter="cup"].active .filter-count {
+    background: rgba(0, 0, 0, 0.2);
+    color: #000;
+}
+
 #gal-nav {
     text-align: center;
     margin-bottom: 3rem;

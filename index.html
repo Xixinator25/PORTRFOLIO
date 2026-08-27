@@ -77,7 +77,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link rel="stylesheet" href="style.css?v=14">
+    <link rel="stylesheet" href="style.css?v=15">
     <link rel="icon" href="favicon.png" type="image/png">
 
     <!-- LCP Optimization -->
@@ -181,8 +181,28 @@
     <section id="portfolio" class="portfolio">
         <div class="section-header reveal">
             <h2>Mes <span>Albums</span></h2>
+            <p class="reveal delay-1">Explorez mes reportages et galeries photos par compétition</p>
         </div>
-        <div id="gallery-container" class="gallery-grid reveal delay-1"></div>
+
+        <div class="album-filters reveal delay-1">
+            <button class="album-filter-btn active" data-filter="all">
+                <i class="fa-solid fa-layer-group"></i> Tous <span class="filter-count" id="count-all"></span>
+            </button>
+            <button class="album-filter-btn" data-filter="l2">
+                <i class="fa-solid fa-crown"></i> Ligue 2 <span class="filter-count" id="count-l2"></span>
+            </button>
+            <button class="album-filter-btn" data-filter="l3">
+                <i class="fa-solid fa-trophy"></i> Ligue 3 (ex-N1) <span class="filter-count" id="count-l3"></span>
+            </button>
+            <button class="album-filter-btn" data-filter="prepa">
+                <i class="fa-solid fa-fire"></i> Prépa L2 <span class="filter-count" id="count-prepa"></span>
+            </button>
+            <button class="album-filter-btn" data-filter="cup">
+                <i class="fa-solid fa-medal"></i> Coupe de France <span class="filter-count" id="count-cup"></span>
+            </button>
+        </div>
+
+        <div id="gallery-container" class="gallery-grid reveal delay-2"></div>
     </section>
 
     <div class="sport-separator"></div>
@@ -383,7 +403,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
-    <script src="main.js?v=14"></script>
+    <script src="main.js?v=15"></script>
 </body>
 
 </html>
