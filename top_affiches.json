@@ -1,5 +1,14 @@
 [
   {
+    "date": "JUILLET 2026",
+    "homeTeam": "FCSM",
+    "awayTeam": "FC METZ",
+    "homeLogo": "images/logos/fcsm.png",
+    "awayLogo": "images/logos/fcmetz.png",
+    "competition": "PRÉPARATION L2",
+    "badgeClass": "bg-l2"
+  },
+  {
     "date": "AVRIL 2026",
     "homeTeam": "Le Mans FC",
     "awayTeam": "Clermont Foot",
