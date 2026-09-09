@@ -3153,28 +3153,60 @@ body.fast-load .hero .btn {
 .profile-socials {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    align-items: center;
+    gap: 15px;
+    margin-top: 1.5rem;
 }
 
 .profile-socials a {
-    width: 45px;
-    height: 45px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.06);
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 1.2rem;
-    transition: 0.3s;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 1.25rem;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    text-decoration: none;
+    position: relative;
 }
 
+.profile-socials a i {
+    color: #ffffff !important;
+    transition: all 0.3s ease;
+}
+
+/* Hover: distinct brand glows with 100% visible crisp white icons */
 .profile-socials a:hover {
-    background: var(--primary);
-    border-color: var(--primary);
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(233, 69, 96, 0.3);
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.profile-socials a[href*="instagram"]:hover {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888) !important;
+    border-color: #e6683c !important;
+    box-shadow: 0 5px 20px rgba(220, 39, 67, 0.45);
+}
+
+.profile-socials a[href*="tiktok"]:hover {
+    background: #000000 !important;
+    border-color: #00f2fe !important;
+    box-shadow: -2px -2px 12px rgba(0, 242, 254, 0.6), 2px 2px 12px rgba(254, 44, 85, 0.6);
+}
+
+.profile-socials a[href*="facebook"]:hover {
+    background: #1877f2 !important;
+    border-color: #1877f2 !important;
+    box-shadow: 0 5px 20px rgba(24, 119, 242, 0.45);
+}
+
+.profile-socials a[href^="mailto"]:hover {
+    background: var(--primary) !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 5px 20px rgba(233, 69, 96, 0.45);
 }
 
 .about-content {
@@ -3747,26 +3779,6 @@ body.fast-load .hero .btn {
     transform: scale(1.05);
 }
 
-.profile-socials {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    padding: 1rem;
-    background: var(--bg-panel);
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.profile-socials a {
-    font-size: 1.5rem;
-    color: var(--text-gray);
-    transition: 0.3s;
-}
-
-.profile-socials a:hover {
-    color: var(--primary);
-    transform: translateY(-3px);
-}
 
 .about-content {
     flex: 1;

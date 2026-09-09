@@ -23,7 +23,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link rel="stylesheet" href="style.css?v=6">
+    <link rel="stylesheet" href="style.css?v=16">
     <link rel="icon" href="favicon.png" type="image/png">
     <style>
         /* Specific override for sub-page header if needed */
@@ -63,13 +63,13 @@
                     <img src="images/profile.jpg" alt="Alexis Sartoris" loading="lazy">
                 </div>
                 <div class="profile-socials">
-                    <a href="https://instagram.com/shooted.by.alexis" target="_blank"><i
+                    <a href="https://instagram.com/shooted.by.alexis" target="_blank" title="Instagram (@shooted.by.alexis)"><i
                             class="fa-brands fa-instagram"></i></a>
-                    <a href="https://www.tiktok.com/@shooted.by.alexis" target="_blank"><i
+                    <a href="https://www.tiktok.com/@shooted.by.alexis" target="_blank" title="TikTok (@shooted.by.alexis)"><i
                             class="fa-brands fa-tiktok"></i></a>
-                    <a href="https://www.facebook.com/shooted.by.alexis" target="_blank"><i
+                    <a href="https://www.facebook.com/shooted.by.alexis" target="_blank" title="Facebook"><i
                             class="fa-brands fa-facebook-f"></i></a>
-                    <a href="mailto:asartoris@outlook.fr"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="mailto:asartoris@outlook.fr" title="Envoyer un email (asartoris@outlook.fr)"><i class="fa-solid fa-envelope"></i></a>
                 </div>
             </div>
 
@@ -102,6 +102,15 @@
                 <div class="zone-action">
                     <h4><i class="fa-solid fa-map-pin"></i> Zone d'Action</h4>
                     <p>Montbéliard • Belfort • Besançon • Héricourt</p>
+                </div>
+
+                <div class="about-actions" style="margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 15px;">
+                    <a href="mailto:asartoris@outlook.fr" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 10px; border-radius: 50px; padding: 0.9rem 2rem; font-family: 'Oswald', sans-serif; letter-spacing: 1px; text-transform: uppercase;">
+                        <i class="fa-solid fa-paper-plane"></i> M'envoyer un Mail
+                    </a>
+                    <a href="index.html#contact" class="btn btn-outline" style="display: inline-flex; align-items: center; gap: 10px; border-radius: 50px; padding: 0.9rem 2rem; font-family: 'Oswald', sans-serif; letter-spacing: 1px; text-transform: uppercase;">
+                        <i class="fa-solid fa-calendar-check"></i> Formulaire / Réservation
+                    </a>
                 </div>
             </div>
         </div>
@@ -166,14 +175,32 @@
 
         fetchMatchCountAndAnimate();
 
-        // Cursor Glow
-        const cursorGlow = document.getElementById('cursor-glow');
-        if (cursorGlow) {
-            document.addEventListener('mousemove', (e) => {
-                cursorGlow.style.left = e.clientX + 'px';
-                cursorGlow.style.top = e.clientY + 'px';
-            });
+        // Toast notification helper for email clicks
+        function showToast(msg) {
+            let toast = document.getElementById('about-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'about-toast';
+                toast.style.cssText = 'position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #111; color: #fff; border: 1px solid var(--primary); padding: 12px 24px; border-radius: 50px; font-family: Montserrat, sans-serif; font-size: 0.9rem; z-index: 10000; box-shadow: 0 10px 30px rgba(0,0,0,0.8); opacity: 0; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: none; display: flex; align-items: center; gap: 10px;';
+                toast.innerHTML = '<i class="fa-solid fa-circle-check" style="color:var(--primary);"></i> <span id="toast-text"></span>';
+                document.body.appendChild(toast);
+            }
+            document.getElementById('toast-text').innerText = msg;
+            toast.style.transform = 'translateX(-50%) translateY(0)';
+            toast.style.opacity = '1';
+            setTimeout(() => {
+                toast.style.transform = 'translateX(-50%) translateY(100px)';
+                toast.style.opacity = '0';
+            }, 3500);
         }
+
+        document.querySelectorAll('a[href^="mailto:"]').forEach(el => {
+            el.addEventListener('click', () => {
+                navigator.clipboard.writeText('asartoris@outlook.fr').then(() => {
+                    showToast('Email copié : asartoris@outlook.fr');
+                }).catch(() => {});
+            });
+        });
     </script>
 </body>
 
