@@ -21,12 +21,16 @@
         "note": "en L2"
       },
       {
-        "name": "Clermont Foot",
-        "logo": "images/logos/CLERMONTFOOT.png"
+        "name": "FC Nantes",
+        "logo": "images/logos/Logo_FC_Nantes.png"
       },
       {
         "name": "FC Metz",
         "logo": "images/logos/fcmetz.png"
+      },
+      {
+        "name": "Clermont Foot",
+        "logo": "images/logos/CLERMONTFOOT.png"
       }
     ]
   },
