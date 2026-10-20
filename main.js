@@ -211,6 +211,23 @@ function initInteractions() {
             answer.style.maxHeight = parent.classList.contains('active') ? answer.scrollHeight + "px" : null;
         });
     });
+
+    // Clickable "Mes Terrains" badges -> scroll to matching album filter or accreditation table
+    document.querySelectorAll('.comp-badge.clickable-terrain').forEach(badge => {
+        badge.addEventListener('click', () => {
+            const filterKey = badge.getAttribute('data-terrain-filter');
+            const matchingCount = allAlbumsData.filter(a => getAlbumCategoryKey(a.category) === filterKey).length;
+            const filterBtn = document.querySelector(`.album-filter-btn[data-filter="${filterKey}"]`);
+            const portfolioSection = document.getElementById('portfolio');
+
+            if (matchingCount > 0 && filterBtn && portfolioSection) {
+                filterBtn.click();
+                portfolioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                window.location.href = 'stats.html#section-accreditations';
+            }
+        });
+    });
 }
 
 function initCursorGlow() {
@@ -578,6 +595,10 @@ function updateLightboxImage() {
         }
     };
     lightboxImg.src = getOriginalImageUrl(rawSrc);
+    const lbCounter = document.getElementById('lb-counter');
+    if (lbCounter) {
+        lbCounter.innerText = `${currentImageIndex + 1} / ${currentAlbumImages.length}`;
+    }
     scale = 1;
     lightboxImg.style.transform = `scale(${scale})`;
 }
@@ -872,8 +893,49 @@ async function initInstagram() {
     }
 }
 
+// --- ACTIVE NAV SCROLL SPY (Galerie & Contact sur index.html) ---
+function initActiveNavScrollSpy() {
+    const navGalerie = document.getElementById('nav-galerie');
+    const navContact = document.getElementById('nav-contact');
+    const portfolioSection = document.getElementById('portfolio');
+    const contactSection = document.getElementById('contact');
+
+    if (!navGalerie || !navContact || !portfolioSection || !contactSection) return;
+
+    function updateActiveNav() {
+        const contactRect = contactSection.getBoundingClientRect();
+        const portfolioRect = portfolioSection.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const nearBottom = (vh + window.scrollY) >= (document.documentElement.scrollHeight - 80);
+
+        const isContactActive = contactRect.top <= vh * 0.65 || nearBottom;
+        const isPortfolioActive = !isContactActive && portfolioRect.top <= vh * 0.5 && portfolioRect.bottom >= 150;
+
+        navContact.classList.toggle('nav-active', isContactActive);
+        navGalerie.classList.toggle('nav-active', isPortfolioActive);
+    }
+
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    window.addEventListener('resize', updateActiveNav, { passive: true });
+    window.addEventListener('hashchange', () => setTimeout(updateActiveNav, 50));
+
+    navGalerie.addEventListener('click', () => {
+        navContact.classList.remove('nav-active');
+        navGalerie.classList.add('nav-active');
+    });
+
+    navContact.addEventListener('click', () => {
+        navGalerie.classList.remove('nav-active');
+        navContact.classList.add('nav-active');
+    });
+
+    updateActiveNav();
+    setTimeout(updateActiveNav, 300);
+}
+
 // Call on startup
 document.addEventListener('DOMContentLoaded', () => {
     initDynamicStats();
     initInstagram();
+    initActiveNavScrollSpy();
 });

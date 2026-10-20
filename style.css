@@ -484,7 +484,13 @@ nav a {
     color: #fff;
 }
 
-nav a:hover {
+header.subpage-header {
+    transform: translateY(0) !important;
+    animation: none !important;
+}
+
+nav a:hover,
+nav a.nav-active {
     color: var(--primary);
 }
 
@@ -499,7 +505,8 @@ nav a::after {
     transition: width 0.3s ease-in-out;
 }
 
-nav a:hover::after {
+nav a:hover::after,
+nav a.nav-active::after {
     width: 100%;
 }
 
@@ -1057,6 +1064,36 @@ body.fast-load .hero .btn {
 
 #lb-next {
     right: 20px;
+}
+
+.lb-counter {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 15, 15, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 2px;
+    padding: 6px 18px;
+    border-radius: 50px;
+    z-index: 10003;
+    pointer-events: none;
+}
+
+.album-bottom-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    padding: 1rem 5% 4rem;
+}
+
+.comp-badge.clickable-terrain {
+    cursor: pointer;
 }
 
 /* --- HOME SECTIONS --- */
@@ -2692,27 +2729,12 @@ body.fast-load .hero .btn {
         padding: 5px;
     }
 
-    /* 5. CARTES & SURVOL "ALWAYS ON" */
+    /* 5. CARTES & SURVOL */
     .tilt-card,
     .stat-card,
     .social-card-new {
         transform: none !important;
-        filter: grayscale(0%) !important;
         border-color: rgba(255, 255, 255, 0.15) !important;
-    }
-
-    .tilt-card img {
-        filter: grayscale(0%) !important;
-        opacity: 1 !important;
-        transform: scale(1.05) !important;
-    }
-
-    .card-overlay {
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: translateY(0) !important;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 20%, rgba(0, 0, 0, 0.6) 80%, transparent) !important;
-        padding: 1.5rem !important;
     }
 
     .kpi-value,
@@ -2847,30 +2869,13 @@ body.fast-load .hero .btn {
         font-size: 1.1rem !important;
     }
 
-    /* IMAGES & TITRES TOUJOURS ACTIFS */
+    /* IMAGES & TITRES */
     .tilt-card,
     .stat-card,
     .social-card-new,
     .kpi-card-enhanced {
         transform: none !important;
-        filter: grayscale(0%) !important;
         border-color: rgba(255, 255, 255, 0.2) !important;
-    }
-
-    .tilt-card img,
-    .photo-card img {
-        filter: grayscale(0%) !important;
-        opacity: 1 !important;
-        transform: scale(1.05) !important;
-    }
-
-    .card-overlay,
-    .fame-overlay {
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: translateY(0) translateZ(0) !important;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 30%, rgba(0, 0, 0, 0.5) 70%, transparent) !important;
-        padding-bottom: 1.5rem !important;
     }
 
     .kpi-value,

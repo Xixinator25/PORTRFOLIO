@@ -77,7 +77,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link rel="stylesheet" href="style.css?v=19">
+    <link rel="stylesheet" href="style.css?v=21">
     <link rel="icon" href="favicon.png" type="image/png">
 
     <!-- LCP Optimization -->
@@ -139,16 +139,17 @@
         <div id="lb-next" class="lb-nav-btn"><i class="fa-solid fa-chevron-right"></i></div>
         <img id="lightbox-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
             alt="Zoom">
+        <div id="lb-counter" class="lb-counter"></div>
     </div>
 
     <header>
         <div class="logo"><a href="#top">shooted.by.<span>alexis</span></a></div>
         <nav>
             <ul>
-                <li><a href="#portfolio">Galerie</a></li>
-                <li><a href="stats.html" style="color:var(--primary);">Data & Stats</a></li>
+                <li><a href="#portfolio" id="nav-galerie">Galerie</a></li>
+                <li><a href="stats.html">Data & Stats</a></li>
                 <li><a href="about.html">À Propos</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact" id="nav-contact">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -222,21 +223,21 @@
                 <h2>Mes <span>Terrains</span></h2>
             </div>
             <div class="stats-cards-grid reveal delay-1">
-                <div class="comp-badge" style="border-color: #00aaff; background: rgba(0, 170, 255, 0.1);">
+                <div class="comp-badge clickable-terrain" data-terrain-filter="l2" title="Voir les albums de Ligue 2" style="border-color: #00aaff; background: rgba(0, 170, 255, 0.1);">
                     <div class="badge-icon"><i class="fa-solid fa-crown" style="color: #00aaff;"></i></div>
                     <div class="badge-info">
                         <span class="badge-title">LIGUE 2</span>
                         <span class="badge-sub" style="color:#00aaff; font-weight:700;" id="hm-l2">1 MATCH</span>
                     </div>
                 </div>
-                <div class="comp-badge">
+                <div class="comp-badge clickable-terrain" data-terrain-filter="l3" title="Voir les albums de Ligue 3 (ex-N1)">
                     <div class="badge-icon"><i class="fa-solid fa-trophy"></i></div>
                     <div class="badge-info">
                         <span class="badge-title">LIGUE 3 <span style="font-size:0.65rem; font-weight:normal; opacity:0.8;">(EX-N1)</span></span>
                         <span class="badge-sub" style="color:var(--primary); font-weight:700;" id="hm-n1">15 MATCHS</span>
                     </div>
                 </div>
-                <div class="comp-badge">
+                <div class="comp-badge clickable-terrain" data-terrain-filter="amateur" title="Voir les accréditations & albums">
                     <div class="badge-icon"><i class="fa-solid fa-shield-halved"></i></div>
                     <div class="badge-info">
                         <span class="badge-title">NATIONAL 2 <span style="font-size:0.65rem; font-weight:normal; opacity:0.8;">(EX-N3)</span></span>
@@ -244,7 +245,7 @@
                             MATCHS</span>
                     </div>
                 </div>
-                <div class="comp-badge">
+                <div class="comp-badge clickable-terrain" data-terrain-filter="cup" title="Voir les albums de Coupe de France">
                     <div class="badge-icon"><i class="fa-solid fa-medal"></i></div>
                     <div class="badge-info">
                         <span class="badge-title">COUPE DE FRANCE</span>
@@ -253,13 +254,18 @@
                         <span class="badge-sub" style="font-size:0.65rem; margin-top:2px;">17e : FCSM - RC LENS</span>
                     </div>
                 </div>
-                <div class="comp-badge special-badge">
+                <div class="comp-badge special-badge clickable-terrain" data-terrain-filter="formation" title="Voir Formation Pro & Accréditations">
                     <div class="badge-icon"><i class="fa-solid fa-star"></i></div>
                     <div class="badge-info">
                         <span class="badge-title">QUART DE FINALE U19</span>
                         <span class="badge-sub" style="color:#fff;" id="hm-other">FCSM - PARIS SG</span>
                     </div>
                 </div>
+            </div>
+            <div class="reveal delay-2" style="margin-top: 2rem; text-align: center;">
+                <a href="stats.html" class="btn btn-outline" style="display: inline-flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-chart-simple" style="color: var(--primary);"></i> Voir toutes mes Stats & Accréditations
+                </a>
             </div>
         </div>
         <div class="split-zone">
@@ -412,7 +418,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
-    <script src="main.js?v=19"></script>
+    <script src="main.js?v=22"></script>
 </body>
 
 </html>
