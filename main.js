@@ -288,11 +288,109 @@ async function initGallery() {
 function getAlbumCategoryKey(cat) {
     const catNorm = (cat || '').toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     if (catNorm.includes('PREPA') || catNorm.includes('AMICAL')) return 'prepa';
-    if (catNorm.includes('LIGUE 2')) return 'l2';
-    if (catNorm.includes('LIGUE 3') || catNorm.includes('NATIONAL 1') || catNorm.includes('N1')) return 'l3';
-    if (catNorm.includes('NATIONAL 2') || catNorm.includes('NATIONAL 3') || catNorm.includes('N2') || catNorm.includes('N3')) return 'n2';
-    if (catNorm.includes('COUPE')) return 'cup';
+    if (catNorm.includes('COUPE') || catNorm.includes('GAMBARDELLA') || catNorm.includes('CDF')) return 'cup';
+    if (
+        catNorm.includes('FORMATION') ||
+        catNorm.includes('U19') ||
+        catNorm.includes('U18') ||
+        catNorm.includes('U17') ||
+        catNorm.includes('JEUNE') ||
+        catNorm.includes('FEMININ') ||
+        catNorm.includes('R1F') ||
+        catNorm.includes('D1F') ||
+        catNorm.includes('D2F') ||
+        catNorm.includes('D3F') ||
+        catNorm.includes('ARKEMA') ||
+        catNorm.includes('SECONDE LIGUE')
+    ) {
+        return 'formation';
+    }
+    if (catNorm.includes('LIGUE 1') || catNorm === 'L1') return 'l1';
+    if (catNorm.includes('LIGUE 2') || catNorm === 'L2') return 'l2';
+    if (catNorm.includes('LIGUE 3') || catNorm.includes('NATIONAL 1') || catNorm.includes('N1') || catNorm === 'L3') return 'l3';
+    if (
+        catNorm.includes('NATIONAL 2') ||
+        catNorm.includes('NATIONAL 3') ||
+        catNorm.includes('N2') ||
+        catNorm.includes('N3') ||
+        catNorm.includes('REGIONAL') ||
+        catNorm.includes('DEPARTEMENTAL') ||
+        catNorm.includes('DISTRICT') ||
+        catNorm.includes('R1') ||
+        catNorm.includes('R2') ||
+        catNorm.includes('R3') ||
+        catNorm.includes('D1') ||
+        catNorm.includes('D2') ||
+        catNorm.includes('D3')
+    ) {
+        return 'amateur';
+    }
     return 'other';
+}
+
+function getAlbumSpecialBadge(category) {
+    const cat = (category || '').toUpperCase();
+    const catNorm = cat.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const baseStyle = "position: absolute; top: 18px; right: 18px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.75rem; letter-spacing: 1px; padding: 6px 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);";
+
+    const isPrepa = catNorm.includes('PREPA') || catNorm.includes('AMICAL');
+    if (isPrepa) {
+        const label = catNorm.includes('L2') ? 'PRÉPA L2' : 'MATCH AMICAL';
+        return `<div class="badge-prepa" style="${baseStyle}">${label}</div>`;
+    }
+    if (catNorm.includes('GAMBARDELLA')) {
+        return `<div class="badge-cup" style="${baseStyle} font-weight: 700;">COUPE GAMBARDELLA</div>`;
+    }
+    if (catNorm.includes('COUPE')) {
+        return `<div class="badge-cup" style="${baseStyle} font-weight: 700;">COUPE DE FRANCE</div>`;
+    }
+    if (
+        catNorm.includes('FEMININ') ||
+        catNorm.includes('R1F') ||
+        catNorm.includes('D1F') ||
+        catNorm.includes('D2F') ||
+        catNorm.includes('D3F') ||
+        catNorm.includes('ARKEMA') ||
+        catNorm.includes('SECONDE LIGUE')
+    ) {
+        let femLabel = 'FÉMININES';
+        if (catNorm.includes('R1F') || catNorm.includes('R1 FEM')) femLabel = 'FÉMININES • R1F';
+        else if (catNorm.includes('D1F') || catNorm.includes('ARKEMA')) femLabel = 'FÉMININES • D1F';
+        else if (catNorm.includes('D2F') || catNorm.includes('SECONDE')) femLabel = 'FÉMININES • D2F';
+        else if (catNorm.includes('D3F') || catNorm.includes('D3 FEM')) femLabel = 'FÉMININES • D3F';
+        return `<div class="badge-fem" style="${baseStyle}">${femLabel}</div>`;
+    }
+    if (
+        catNorm.includes('FORMATION') ||
+        catNorm.includes('U19') ||
+        catNorm.includes('U18') ||
+        catNorm.includes('U17') ||
+        catNorm.includes('JEUNE')
+    ) {
+        let formLabel = 'CENTRE DE FORMATION PRO';
+        if (catNorm.includes('U19')) formLabel = 'FORMATION PRO • U19';
+        else if (catNorm.includes('U17')) formLabel = 'FORMATION PRO • U17';
+        return `<div class="badge-formation" style="${baseStyle}">${formLabel}</div>`;
+    }
+    if (catNorm.includes('LIGUE 1') || catNorm === 'L1') {
+        return `<div class="badge-l1" style="${baseStyle}">PRO : LIGUE 1</div>`;
+    }
+    if (catNorm.includes('LIGUE 2') || catNorm === 'L2') {
+        return `<div class="badge-l2" style="${baseStyle}">PRO : LIGUE 2</div>`;
+    }
+    if (catNorm.includes('NATIONAL 2') || catNorm === 'N2') {
+        return `<div class="badge-n3" style="${baseStyle}">NATIONAL 2</div>`;
+    }
+    if (catNorm.includes('NATIONAL 3') || catNorm === 'N3') {
+        return `<div class="badge-n3" style="${baseStyle}">NATIONAL 3</div>`;
+    }
+    if (catNorm.includes('REGIONAL') || catNorm.includes('R1') || catNorm.includes('R2') || catNorm.includes('R3')) {
+        return `<div class="badge-reg" style="${baseStyle}">${cat}</div>`;
+    }
+    if (catNorm.includes('DEPARTEMENTAL') || catNorm.includes('DISTRICT') || catNorm.includes('D1') || catNorm.includes('D2') || catNorm.includes('D3')) {
+        return `<div class="badge-reg" style="${baseStyle}">${cat}</div>`;
+    }
+    return '';
 }
 
 function initFilters() {
@@ -302,17 +400,26 @@ function initFilters() {
     // Calculate dynamic counts
     const counts = {
         all: allAlbumsData.length,
+        l1: allAlbumsData.filter(a => getAlbumCategoryKey(a.category) === 'l1').length,
         l2: allAlbumsData.filter(a => getAlbumCategoryKey(a.category) === 'l2').length,
         l3: allAlbumsData.filter(a => getAlbumCategoryKey(a.category) === 'l3').length,
         prepa: allAlbumsData.filter(a => getAlbumCategoryKey(a.category) === 'prepa').length,
-        cup: allAlbumsData.filter(a => getAlbumCategoryKey(a.category) === 'cup').length
+        cup: allAlbumsData.filter(a => getAlbumCategoryKey(a.category) === 'cup').length,
+        formation: allAlbumsData.filter(a => getAlbumCategoryKey(a.category) === 'formation').length,
+        amateur: allAlbumsData.filter(a => getAlbumCategoryKey(a.category) === 'amateur').length
     };
 
-    // Update count labels
+    // Update count labels and auto-show optional filter buttons when count > 0
     Object.keys(counts).forEach(key => {
         const el = document.getElementById(`count-${key}`);
         if (el) el.innerText = counts[key];
     });
+
+    const btnL1 = document.getElementById('filter-btn-l1');
+    if (btnL1) btnL1.style.display = counts.l1 > 0 ? '' : 'none';
+
+    const btnAmateur = document.getElementById('filter-btn-amateur');
+    if (btnAmateur) btnAmateur.style.display = counts.amateur > 0 ? '' : 'none';
 
     buttons.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -340,7 +447,7 @@ function renderAlbums(albums) {
 
     // Check if empty
     if (albums.length === 0) {
-        container.innerHTML = "<p style='text-align:center; color:#666; width:100%; grid-column: 1/-1;'>Aucun album dans cette catégorie.</p>";
+        container.innerHTML = "<p style='text-align:center; color:#666; width:100%; grid-column: 1/-1;'>Aucun album dans cette catégorie pour le moment.</p>";
         return;
     }
 
@@ -350,21 +457,7 @@ function renderAlbums(albums) {
         div.style.transitionDelay = `${(idx + 1) * 0.05}s`;
         div.style.display = 'block';
 
-        const cat = (album.category || '').toUpperCase();
-        const catNorm = cat.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-
-        const isPrepa = catNorm.includes('PREPA') || catNorm.includes('AMICAL');
-        const isLigue2 = catNorm.includes('LIGUE 2') && !isPrepa;
-        const isCoupe = catNorm.includes('COUPE');
-
-        let specialBadge = '';
-        if (isLigue2) {
-            specialBadge = `<div class="badge-l2" style="position: absolute; top: 18px; right: 18px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.75rem; letter-spacing: 1px; padding: 6px 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">PRO : LIGUE 2</div>`;
-        } else if (isPrepa) {
-            specialBadge = `<div class="badge-prepa" style="position: absolute; top: 18px; right: 18px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.75rem; letter-spacing: 1px; padding: 6px 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">PRÉPA L2</div>`;
-        } else if (isCoupe) {
-            specialBadge = `<div class="badge-cup" style="position: absolute; top: 18px; right: 18px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.75rem; letter-spacing: 1px; padding: 6px 12px; font-weight: 700; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">COUPE DE FRANCE</div>`;
-        }
+        const specialBadge = getAlbumSpecialBadge(album.category);
 
         // Generate ID for link: favor album.id, fallback to slugified title
         const slugify = text => text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
@@ -641,12 +734,22 @@ function createMatchCard(match) {
 
     const compNorm = (match.competition || '').toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     const isPrepa = compNorm.includes('PREPA') || compNorm.includes('AMICAL') || match.competitionBadge === 'badge-prepa';
-    const isLigue2 = compNorm.includes('LIGUE 2') && !isPrepa;
+    const isLigue1 = (compNorm.includes('LIGUE 1') || match.competitionBadge === 'badge-l1') && !isPrepa;
+    const isLigue2 = (compNorm.includes('LIGUE 2') || match.competitionBadge === 'badge-l2') && !isPrepa;
+    const isFem = compNorm.includes('FEMININ') || compNorm.includes('R1F') || compNorm.includes('D1F') || compNorm.includes('D2F') || compNorm.includes('D3F') || match.competitionBadge === 'badge-fem';
+    const isFormation = compNorm.includes('FORMATION') || compNorm.includes('U19') || compNorm.includes('U17') || match.competitionBadge === 'badge-formation' || match.competitionBadge === 'badge-u19';
+
     let specialBadge = '';
-    if (isLigue2) {
+    if (isLigue1) {
+        specialBadge = `<div class="badge-l1" style="position: absolute; top: 15px; right: 15px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1px; padding: 4px 10px;">PRO : LIGUE 1</div>`;
+    } else if (isLigue2) {
         specialBadge = `<div class="badge-l2" style="position: absolute; top: 15px; right: 15px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1px;">PRO : LIGUE 2</div>`;
     } else if (isPrepa) {
-        specialBadge = `<div class="badge-prepa" style="position: absolute; top: 15px; right: 15px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1px; padding: 4px 10px;">PRÉPA L2</div>`;
+        specialBadge = `<div class="badge-prepa" style="position: absolute; top: 15px; right: 15px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1px; padding: 4px 10px;">PRÉPA / AMICAL</div>`;
+    } else if (isFem) {
+        specialBadge = `<div class="badge-fem" style="position: absolute; top: 15px; right: 15px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1px; padding: 4px 10px;">FÉMININES</div>`;
+    } else if (isFormation) {
+        specialBadge = `<div class="badge-formation" style="position: absolute; top: 15px; right: 15px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1px; padding: 4px 10px;">FORMATION PRO</div>`;
     }
 
     card.innerHTML = `

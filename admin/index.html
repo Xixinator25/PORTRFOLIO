@@ -107,7 +107,7 @@
                         <input type="number" id="comp-cup" min="0" value="0">
                     </div>
                     <div class="form-group">
-                        <label>U19 / Autres</label>
+                        <label>Formation / Féminines / Amateur</label>
                         <input type="number" id="comp-other" min="0" value="0">
                     </div>
                 </div>
@@ -309,12 +309,15 @@
                 <div class="form-group">
                     <label>Badge CSS</label>
                     <select id="affiche-badge">
+                        <option value="bg-l1">Ligue 1</option>
                         <option value="bg-l2">Ligue 2</option>
-                        <option value="bg-n1">National 1</option>
-                        <option value="bg-n3">National 3</option>
-                        <option value="bg-cup">Coupe</option>
-                        <option value="bg-u19">U19</option>
-                        <option value="bg-reg">Régional</option>
+                        <option value="bg-prepa">Prépa / Amical</option>
+                        <option value="bg-n1">Ligue 3 / National 1</option>
+                        <option value="bg-n3">National 2 / National 3</option>
+                        <option value="bg-cup">Coupe de France / Gambardella</option>
+                        <option value="bg-formation">Centre de Formation Pro / U19 / U17</option>
+                        <option value="bg-fem">Féminines (D1F / D2F / D3F / R1F)</option>
+                        <option value="bg-reg">Régional / Départemental</option>
                     </select>
                 </div>
                 <div class="form-actions">
@@ -404,16 +407,40 @@
                         style="width: 100%; padding: 0.8rem; background: var(--bg-dark); border: 1px solid var(--border-color); color: #fff; border-radius: 8px;"
                         required>
                         <option value="">Sélectionner une catégorie...</option>
-                        <option value="PRÉPARATION L2">⚽ PRÉPARATION L2 (Badge : Prépa L2)</option>
-                        <option value="LIGUE 2">🏆 LIGUE 2 (Badge : Pro Ligue 2)</option>
-                        <option value="LIGUE 3">🥇 LIGUE 3 (ex-N1)</option>
-                        <option value="NATIONAL 1">NATIONAL 1</option>
-                        <option value="NATIONAL 2">NATIONAL 2 (ex-N3)</option>
-                        <option value="NATIONAL 3">NATIONAL 3</option>
-                        <option value="COUPE DE FRANCE">🎖️ COUPE DE FRANCE (Badge : Coupe)</option>
-                        <option value="FORMATION">⭐ FORMATION / U19</option>
-                        <option value="RÉGIONAL">📍 RÉGIONAL</option>
-                        <option value="REPORTAGE">📸 REPORTAGE / AUTRE</option>
+                        <optgroup label="🏆 Professionnel & National">
+                            <option value="LIGUE 1">⭐ LIGUE 1 (Badge : Pro Ligue 1)</option>
+                            <option value="LIGUE 2">🏆 LIGUE 2 (Badge : Pro Ligue 2)</option>
+                            <option value="PRÉPARATION L2">⚽ PRÉPARATION L2 (Badge : Prépa L2)</option>
+                            <option value="MATCH AMICAL">🔥 MATCH AMICAL (Badge : Match Amical)</option>
+                            <option value="LIGUE 3">🥇 LIGUE 3 (ex-N1)</option>
+                            <option value="NATIONAL 1">NATIONAL 1</option>
+                            <option value="NATIONAL 2">🛡️ NATIONAL 2 (Badge : National 2)</option>
+                            <option value="NATIONAL 3">🛡️ NATIONAL 3 (Badge : National 3)</option>
+                        </optgroup>
+                        <optgroup label="🎖️ Coupes">
+                            <option value="COUPE DE FRANCE">🎖️ COUPE DE FRANCE (Badge : Coupe de France)</option>
+                            <option value="COUPE GAMBARDELLA">🏅 COUPE GAMBARDELLA (Badge : Gambardella)</option>
+                        </optgroup>
+                        <optgroup label="🎓 Centres de Formation & Jeunes">
+                            <option value="CENTRE DE FORMATION PRO">🎓 CENTRE DE FORMATION PRO (Badge : Centre de Formation Pro)</option>
+                            <option value="U19 NATIONAL">⭐ U19 NATIONAL (Badge : Formation Pro • U19)</option>
+                            <option value="U17 NATIONAL">⭐ U17 NATIONAL (Badge : Formation Pro • U17)</option>
+                            <option value="JEUNES RÉGIONAL / D2">⚡ JEUNES RÉGIONAL / DÉPARTEMENTAL (U18 R1, D2...)</option>
+                        </optgroup>
+                        <optgroup label="🟣 Football Féminin">
+                            <option value="R1 FÉMININE (R1F)">🟣 R1 FÉMININE - R1F (Badge : Féminines • R1F)</option>
+                            <option value="ARKEMA PREMIÈRE LIGUE (D1F)">🟣 ARKEMA PREMIÈRE LIGUE - D1F (Badge : Féminines • D1F)</option>
+                            <option value="SECONDE LIGUE (D2F)">🟣 SECONDE LIGUE - D2F (Badge : Féminines • D2F)</option>
+                            <option value="D3 FÉMININE (D3F)">🟣 D3 FÉMININE - D3F (Badge : Féminines • D3F)</option>
+                            <option value="FOOTBALL FÉMININ">🟣 FOOTBALL FÉMININ / FÉMININES (Badge : Féminines)</option>
+                        </optgroup>
+                        <optgroup label="📍 Régional & Départemental (Amateur)">
+                            <option value="RÉGIONAL 1 (R1)">📍 RÉGIONAL 1 (R1)</option>
+                            <option value="RÉGIONAL 2 (R2)">📍 RÉGIONAL 2 (R2)</option>
+                            <option value="RÉGIONAL 3 (R3)">📍 RÉGIONAL 3 (R3)</option>
+                            <option value="DÉPARTEMENTAL (D1 / D2 / D3)">📍 DÉPARTEMENTAL (D1 / D2 / D3)</option>
+                            <option value="REPORTAGE">📸 REPORTAGE / AUTRE</option>
+                        </optgroup>
                     </select>
                 </div>
 
@@ -480,15 +507,28 @@
                     <label>Compétition</label>
                     <select id="match-competition" required>
                         <option value="">Sélectionner...</option>
+                        <option value="Ligue 1">Ligue 1</option>
                         <option value="Ligue 2">Ligue 2</option>
                         <option value="Prépa L2">Prépa L2</option>
+                        <option value="Match Amical">Match Amical</option>
                         <option value="Ligue 3">Ligue 3 (ex-N1)</option>
                         <option value="National 1">National 1</option>
                         <option value="National 2">National 2 (ex-N3)</option>
                         <option value="National 3">National 3</option>
                         <option value="Coupe de France">Coupe de France</option>
+                        <option value="Coupe Gambardella">Coupe Gambardella</option>
+                        <option value="Centre de Formation Pro">Centre de Formation Pro</option>
                         <option value="U19 National">U19 National</option>
-                        <option value="Régional">Régional</option>
+                        <option value="U17 National">U17 National</option>
+                        <option value="R1 Féminine (R1F)">R1 Féminine (R1F)</option>
+                        <option value="D1 Féminine">D1 Féminine</option>
+                        <option value="D2 Féminine">D2 Féminine</option>
+                        <option value="D3 Féminine">D3 Féminine</option>
+                        <option value="Féminines">Féminines</option>
+                        <option value="Régional 1 (R1)">Régional 1 (R1)</option>
+                        <option value="Régional 2 (R2)">Régional 2 (R2)</option>
+                        <option value="Régional 3 (R3)">Régional 3 (R3)</option>
+                        <option value="Départemental (D1/D2/D3)">Départemental (D1/D2/D3)</option>
                     </select>
                 </div>
 
@@ -496,13 +536,15 @@
                     <label>Badge Compétition</label>
                     <select id="match-badge" required>
                         <option value="">Sélectionner...</option>
+                        <option value="badge-l1">Ligue 1 (badge-l1)</option>
                         <option value="badge-l2">Ligue 2 (badge-l2)</option>
-                        <option value="badge-prepa">Prépa L2 (badge-prepa)</option>
+                        <option value="badge-prepa">Prépa / Amical (badge-prepa)</option>
                         <option value="badge-n1">Ligue 3 / National 1 (badge-n1)</option>
                         <option value="badge-n3">National 2 / National 3 (badge-n3)</option>
-                        <option value="badge-cup">Coupe (badge-cup)</option>
-                        <option value="badge-u19">U19 (badge-u19)</option>
-                        <option value="badge">Régional (badge)</option>
+                        <option value="badge-cup">Coupe de France / Gambardella (badge-cup)</option>
+                        <option value="badge-formation">Centre de Formation Pro / U19 / U17 (badge-formation)</option>
+                        <option value="badge-fem">Féminines / R1F / D1F / D2F (badge-fem)</option>
+                        <option value="badge-reg">Régional / Départemental (badge-reg)</option>
                     </select>
                 </div>
 

@@ -121,6 +121,18 @@
     ]
   },
   {
+    "id": "formation",
+    "name": "Centres de Formation Pro & Féminines",
+    "logo": "fa-solid fa-graduation-cap",
+    "clubs": [
+      {
+        "name": "Paris SG (U19)",
+        "logo": "images/logos/psg.png",
+        "note": "U19 Nat."
+      }
+    ]
+  },
+  {
     "id": "reg",
     "name": "Régional et Départemental",
     "logo": "fa-solid fa-location-dot",

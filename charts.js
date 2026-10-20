@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         // Fallback to default data (Updated with correct values)
         statsData = {
             competitionDistribution: {
-                labels: ['Ligue 1', 'Ligue 2', 'National 1', 'National 3', 'Coupe de France', 'U19 / Autres'],
-                values: [0, 1, 14, 7, 5, 2]
+                labels: ['Ligue 1', 'Ligue 2', 'Ligue 3 (ex-N1)', 'National 2 (ex-N3)', 'Coupe de France', 'Formation / Fém. / Amateur'],
+                values: [0, 3, 16, 7, 7, 15]
             },
             seasonEvolution: {
                 labels: ['Août', 'Sept', 'Oct', 'Nov', 'Déc', 'Jan', 'Fév', 'Mars', 'Avr', 'Mai'],
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     const totalNote = document.getElementById('total-matches-note');
     if (totalNote) {
-        totalNote.innerHTML = `Total de ${totalMatches} matchs officiels couverts`;
+        totalNote.innerHTML = `Total de ${totalMatches} matchs principaux comptabilisés (hors matchs amateurs non comptabilisés)`;
     }
 
     // Global Chart.js defaults for dark mode
