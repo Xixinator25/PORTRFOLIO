@@ -23,7 +23,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link rel="stylesheet" href="style.css?v=16">
+    <link rel="stylesheet" href="style.css?v=21">
     <link rel="icon" href="favicon.png" type="image/png">
     <style>
         /* Specific override for sub-page header if needed */
@@ -45,10 +45,16 @@
 
     <div id="cursor-glow"></div>
 
-    <header>
+    <header class="subpage-header">
         <div class="logo"><a href="index.html">shooted.by.<span>alexis</span></a></div>
-        <a href="index.html" class="btn btn-outline" style="border: 1px solid rgba(255,255,255,0.2); color: #fff;"><i
-                class="fa-solid fa-arrow-left"></i> Retour</a>
+        <nav>
+            <ul>
+                <li><a href="index.html#portfolio">Galerie</a></li>
+                <li><a href="stats.html">Data & Stats</a></li>
+                <li><a href="about.html" class="nav-active">À Propos</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
     <div id="about" class="about-section">
