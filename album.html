@@ -333,7 +333,8 @@
                 if(album.cover) {
                     const ogImg = document.createElement('meta');
                     ogImg.setAttribute('property', 'og:image');
-                    ogImg.content = `https://shooted-by-alexis.vercel.app/${album.cover}`;
+                    const coverBase = getOptimizedBase(album.cover);
+                    ogImg.content = `https://shooted-by-alexis.vercel.app/${coverBase}_large.webp`;
                     document.head.appendChild(ogImg);
                 }
 
@@ -357,58 +358,32 @@
                         item.className = 'mg-item'; // Removed 'reveal' class
 
                         // Generate optimized image paths
-                        const base = imgSrc.substring(0, imgSrc.lastIndexOf('.'));
+                        const base = getOptimizedBase(imgSrc);
                         const tiny = `${base}_tiny.webp`;
                         const small = `${base}_small.webp`;
                         const medium = `${base}_medium.webp`;
                         const large = `${base}_large.webp`;
 
-                        // Create img element with lazy loading
+                        // Create img element with lazy loading (grid uses optimized WebP on Vercel)
                         let imgTag = '';
-                        if (imgSrc.endsWith('.webp') && imgSrc.includes('_large')) {
-                            // Already optimized webp - use progressive loading
-                            const baseOptimized = imgSrc.replace('_large.webp', '');
-                            if (index < 4) {
-                                imgTag = `<img 
-                                    src="${imgSrc}" 
-                                    srcset="${baseOptimized}_small.webp 500w, ${baseOptimized}_medium.webp 800w, ${imgSrc} 1200w"
-                                    sizes="(max-width: 600px) 90vw, (max-width: 900px) 45vw, 300px"
-                                    alt="Photo Album" 
-                                    fetchpriority="high"
-                                    onerror="this.parentElement.style.display='none'">`;
-                            } else {
-                                imgTag = `<img 
-                                    src="${baseOptimized}_tiny.webp"
-                                    data-src="${imgSrc}" 
-                                    data-srcset="${baseOptimized}_small.webp 500w, ${baseOptimized}_medium.webp 800w, ${imgSrc} 1200w"
-                                    sizes="(max-width: 600px) 90vw, (max-width: 900px) 45vw, 300px"
-                                    alt="Photo Album" 
-                                    class="blur-load"
-                                    loading="lazy"
-                                    onerror="this.parentElement.style.display='none'">`;
-                            }
-
+                        if (index < 4) {
+                            imgTag = `<img 
+                                src="${large}" 
+                                srcset="${small} 500w, ${medium} 800w, ${large} 1200w"
+                                sizes="(max-width: 600px) 90vw, (max-width: 900px) 45vw, 300px"
+                                alt="Photo Album" 
+                                fetchpriority="high"
+                                onerror="this.parentElement.style.display='none'">`;
                         } else {
-                            // JPG with generated optimized versions
-                            if (index < 4) {
-                                imgTag = `<img 
-                                    src="${imgSrc}" 
-                                    srcset="${small} 500w, ${medium} 800w, ${large} 1200w"
-                                    sizes="(max-width: 600px) 90vw, (max-width: 900px) 45vw, 300px"
-                                    alt="Photo Album" 
-                                    fetchpriority="high"
-                                    onerror="this.parentElement.style.display='none'">`;
-                            } else {
-                                imgTag = `<img 
-                                    src="${tiny}"
-                                    data-src="${imgSrc}" 
-                                    data-srcset="${small} 500w, ${medium} 800w, ${large} 1200w"
-                                    sizes="(max-width: 600px) 90vw, (max-width: 900px) 45vw, 300px"
-                                    alt="Photo Album" 
-                                    class="blur-load"
-                                    loading="lazy"
-                                    onerror="this.parentElement.style.display='none'">`;
-                            }
+                            imgTag = `<img 
+                                src="${tiny}"
+                                data-src="${large}" 
+                                data-srcset="${small} 500w, ${medium} 800w, ${large} 1200w"
+                                sizes="(max-width: 600px) 90vw, (max-width: 900px) 45vw, 300px"
+                                alt="Photo Album" 
+                                class="blur-load"
+                                loading="lazy"
+                                onerror="this.parentElement.style.display='none'">`;
                         }
 
                         item.innerHTML = imgTag;
@@ -426,12 +401,12 @@
                                 const src = img.getAttribute('data-src');
                                 const srcset = img.getAttribute('data-srcset');
 
+                                if (srcset) {
+                                    img.srcset = srcset;
+                                }
                                 if (src) {
                                     img.src = src;
                                     img.onload = () => img.classList.add('loaded');
-                                }
-                                if (srcset) {
-                                    img.srcset = srcset;
                                 }
 
                                 observer.unobserve(entry.target);
@@ -455,6 +430,27 @@
             }
         });
 
+        // --- HELPERS FOR ORIGINAL VS OPTIMIZED IMAGES ---
+        const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/Xixinator25/PORTRFOLIO/main/';
+
+        function isLocalEnvironment() {
+            const h = window.location.hostname;
+            return h === 'localhost' || h === '127.0.0.1' || h.endsWith('.e2b.app');
+        }
+
+        function getOriginalImageUrl(imgPath) {
+            if (!imgPath) return '';
+            if (imgPath.startsWith('http://') || imgPath.startsWith('https://')) return imgPath;
+            if (isLocalEnvironment()) return imgPath;
+            const cleanPath = imgPath.replace(/^\//, '');
+            return GITHUB_RAW_BASE + cleanPath.split('/').map(encodeURIComponent).join('/');
+        }
+
+        function getOptimizedBase(imgPath) {
+            if (!imgPath) return '';
+            return imgPath.replace(/_(tiny|small|medium|large)\.webp$/, '').replace(/\.[^.]+$/, '');
+        }
+
         // --- LIGHTBOX LOGIC ---
         const lightbox = document.getElementById('lightbox');
         const lbImg = document.getElementById('lightbox-img');
@@ -470,7 +466,15 @@
         }
 
         function updateLightbox() {
-            lbImg.src = currentImages[currentIndex];
+            const rawSrc = currentImages[currentIndex];
+            const base = getOptimizedBase(rawSrc);
+            const fallbackLarge = `${base}_large.webp`;
+            lbImg.onerror = () => {
+                if (lbImg.src && !lbImg.src.endsWith('_large.webp')) {
+                    lbImg.src = fallbackLarge;
+                }
+            };
+            lbImg.src = getOriginalImageUrl(rawSrc);
         }
 
         document.getElementById('lightbox-close').onclick = closeLightbox;

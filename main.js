@@ -6,6 +6,26 @@ const CONFIG = {
     seasonEnd: "2027-05-22"
 };
 
+const GITHUB_RAW_BASE = 'https://raw.githubusercontent.com/Xixinator25/PORTRFOLIO/main/';
+
+function isLocalEnvironment() {
+    const h = window.location.hostname;
+    return h === 'localhost' || h === '127.0.0.1' || h.endsWith('.e2b.app');
+}
+
+function getOriginalImageUrl(imgPath) {
+    if (!imgPath) return '';
+    if (imgPath.startsWith('http://') || imgPath.startsWith('https://')) return imgPath;
+    if (isLocalEnvironment()) return imgPath;
+    const cleanPath = imgPath.replace(/^\//, '');
+    return GITHUB_RAW_BASE + cleanPath.split('/').map(encodeURIComponent).join('/');
+}
+
+function getOptimizedBase(imgPath) {
+    if (!imgPath) return '';
+    return imgPath.replace(/_(tiny|small|medium|large)\.webp$/, '').replace(/\.[^.]+$/, '');
+}
+
 // --- INITIALISATION ---
 document.addEventListener("DOMContentLoaded", () => {
     initLoader();
@@ -36,12 +56,12 @@ function initLazyLoad() {
                 const src = img.getAttribute('data-src');
                 const srcset = img.getAttribute('data-srcset');
 
+                if (srcset) {
+                    img.srcset = srcset;
+                }
                 if (src) {
                     img.src = src;
                     img.onload = () => img.classList.add('loaded');
-                }
-                if (srcset) {
-                    img.srcset = srcset;
                 }
 
                 observer.unobserve(img);
@@ -352,37 +372,29 @@ function renderAlbums(albums) {
 
         div.href = `album.html?id=${linkId}`;
 
-        const base = album.cover.substring(0, album.cover.lastIndexOf('.'));
+        const base = getOptimizedBase(album.cover);
         const tiny = `${base}_tiny.webp`;
         const small = `${base}_small.webp`;
         const medium = `${base}_medium.webp`;
+        const large = `${base}_large.webp`;
 
-        // Check if cover is already .webp (like chateauroux optimized)
         let imgTag = '';
-        if (album.cover.endsWith('.webp')) {
-            if (idx < 6) {
-                imgTag = `<img src="${album.cover}" alt="${album.title}" fetchpriority="high">`;
-            } else {
-                imgTag = `<img src="${tiny}" data-src="${album.cover}" alt="${album.title}" class="blur-load" loading="lazy">`;
-            }
+        if (idx < 6) {
+            imgTag = `<img 
+                src="${large}" 
+                srcset="${small} 500w, ${medium} 800w, ${large} 1200w"
+                sizes="(max-width: 600px) 90vw, (max-width: 900px) 50vw, 33vw"
+                alt="${album.title}"
+                fetchpriority="high">`;
         } else {
-            if (idx < 6) {
-                imgTag = `<img 
-                    src="${album.cover}" 
-                    srcset="${small} 500w, ${medium} 800w, ${album.cover} 1200w"
-                    sizes="(max-width: 600px) 90vw, (max-width: 900px) 50vw, 33vw"
-                    alt="${album.title}"
-                    fetchpriority="high">`;
-            } else {
-                imgTag = `<img 
-                    src="${tiny}"
-                    data-src="${album.cover}" 
-                    data-srcset="${small} 500w, ${medium} 800w, ${album.cover} 1200w"
-                    sizes="(max-width: 600px) 90vw, (max-width: 900px) 50vw, 33vw"
-                    alt="${album.title}" 
-                    class="blur-load"
-                    loading="lazy">`;
-            }
+            imgTag = `<img 
+                src="${tiny}"
+                data-src="${large}" 
+                data-srcset="${small} 500w, ${medium} 800w, ${large} 1200w"
+                sizes="(max-width: 600px) 90vw, (max-width: 900px) 50vw, 33vw"
+                alt="${album.title}" 
+                class="blur-load"
+                loading="lazy">`;
         }
 
         div.innerHTML = `
@@ -421,7 +433,7 @@ function loadAlbumPhotos(album, allAlbums) {
         div.className = 'photo-card tilt-card reveal';
         div.style.transitionDelay = `${idx * 0.05}s`;
         div.onclick = () => openLightbox(idx);
-        const base = imgSrc.substring(0, imgSrc.lastIndexOf('.'));
+        const base = getOptimizedBase(imgSrc);
         const tiny = `${base}_tiny.webp`;
         const small = `${base}_small.webp`;
         const medium = `${base}_medium.webp`;
@@ -429,7 +441,7 @@ function loadAlbumPhotos(album, allAlbums) {
 
         div.innerHTML = `<img 
             src="${tiny}"
-            data-src="${imgSrc}" 
+            data-src="${large}" 
             data-srcset="${small} 500w, ${medium} 800w, ${large} 1200w"
             sizes="(max-width: 600px) 90vw, (max-width: 900px) 45vw, 300px"
             alt="Photo ${album.title}" 
@@ -464,7 +476,15 @@ function openLightbox(index) {
 }
 
 function updateLightboxImage() {
-    lightboxImg.src = currentAlbumImages[currentImageIndex];
+    const rawSrc = currentAlbumImages[currentImageIndex];
+    const base = getOptimizedBase(rawSrc);
+    const fallbackLarge = `${base}_large.webp`;
+    lightboxImg.onerror = () => {
+        if (lightboxImg.src && !lightboxImg.src.endsWith('_large.webp')) {
+            lightboxImg.src = fallbackLarge;
+        }
+    };
+    lightboxImg.src = getOriginalImageUrl(rawSrc);
     scale = 1;
     lightboxImg.style.transform = `scale(${scale})`;
 }
@@ -713,12 +733,18 @@ async function initInstagram() {
         const response = await fetch(`instagram_posts.json?t=${Date.now()}`);
         const posts = await response.json();
 
-        container.innerHTML = posts.map((post, idx) => `
+        container.innerHTML = posts.map((post, idx) => {
+            const base = getOptimizedBase(post.image);
+            const small = `${base}_small.webp`;
+            const medium = `${base}_medium.webp`;
+            const large = `${base}_large.webp`;
+            return `
             <a href="${post.url}" target="_blank" class="insta-card tilt-card reveal" style="transition-delay: ${(idx + 1) * 0.1}s;">
-                <img src="${post.image}" alt="${post.alt}" loading="lazy">
+                <img src="${medium}" srcset="${small} 500w, ${medium} 800w, ${large} 1200w" sizes="(max-width: 600px) 90vw, 300px" alt="${post.alt}" loading="lazy">
                 <div class="insta-meta"><span class="insta-user">@shooted.by.alexis</span><i class="fa-brands fa-instagram insta-icon"></i></div>
             </a>
-        `).join('');
+        `;
+        }).join('');
 
         // Apply interaction observers
         document.querySelectorAll('#insta-container .reveal').forEach((el, idx) => {
