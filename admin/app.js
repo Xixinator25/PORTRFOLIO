@@ -107,21 +107,69 @@ document.getElementById('album-folder').onchange = (e) => {
     const catSelect = document.getElementById('album-category');
     const titleInput = document.getElementById('album-title');
 
-    if (clean.startsWith('PREPA_') || clean.startsWith('AMICAL_')) {
+    if (clean.startsWith('PREPA_')) {
         catSelect.value = 'PRÉPARATION L2';
-        clean = clean.replace(/^(PREPA_|AMICAL_)/, '');
+        clean = clean.replace(/^PREPA_/, '');
+    } else if (clean.startsWith('AMICAL_')) {
+        catSelect.value = 'MATCH AMICAL';
+        clean = clean.replace(/^AMICAL_/, '');
+    } else if (clean.startsWith('L1_')) {
+        catSelect.value = 'LIGUE 1';
+        clean = clean.replace(/^L1_/, '');
     } else if (clean.startsWith('L2_')) {
         catSelect.value = 'LIGUE 2';
         clean = clean.replace(/^L2_/, '');
     } else if (clean.startsWith('L3_') || clean.startsWith('N1_')) {
         catSelect.value = 'LIGUE 3';
         clean = clean.replace(/^(L3_|N1_)/, '');
-    } else if (clean.startsWith('N2_') || clean.startsWith('N3_')) {
+    } else if (clean.startsWith('N2_')) {
         catSelect.value = 'NATIONAL 2';
-        clean = clean.replace(/^(N2_|N3_)/, '');
-    } else if (clean.startsWith('COUPE_')) {
+        clean = clean.replace(/^N2_/, '');
+    } else if (clean.startsWith('N3_')) {
+        catSelect.value = 'NATIONAL 3';
+        clean = clean.replace(/^N3_/, '');
+    } else if (clean.startsWith('GAMBARDELLA_')) {
+        catSelect.value = 'COUPE GAMBARDELLA';
+        clean = clean.replace(/^GAMBARDELLA_/, '');
+    } else if (clean.startsWith('COUPE_') || clean.startsWith('CDF_') || clean.startsWith('Coupe_de_France_')) {
         catSelect.value = 'COUPE DE FRANCE';
-        clean = clean.replace(/^COUPE_/, '');
+        clean = clean.replace(/^(COUPE_|CDF_|Coupe_de_France_)/i, '');
+    } else if (clean.startsWith('R1F_')) {
+        catSelect.value = 'R1 FÉMININE (R1F)';
+        clean = clean.replace(/^R1F_/, '');
+    } else if (clean.startsWith('D1F_')) {
+        catSelect.value = 'ARKEMA PREMIÈRE LIGUE (D1F)';
+        clean = clean.replace(/^D1F_/, '');
+    } else if (clean.startsWith('D2F_')) {
+        catSelect.value = 'SECONDE LIGUE (D2F)';
+        clean = clean.replace(/^D2F_/, '');
+    } else if (clean.startsWith('D3F_')) {
+        catSelect.value = 'D3 FÉMININE (D3F)';
+        clean = clean.replace(/^D3F_/, '');
+    } else if (clean.startsWith('FEM_')) {
+        catSelect.value = 'FOOTBALL FÉMININ';
+        clean = clean.replace(/^FEM_/, '');
+    } else if (clean.startsWith('FORMATION_')) {
+        catSelect.value = 'CENTRE DE FORMATION PRO';
+        clean = clean.replace(/^FORMATION_/, '');
+    } else if (clean.startsWith('U19_')) {
+        catSelect.value = 'U19 NATIONAL';
+        clean = clean.replace(/^U19_/, '');
+    } else if (clean.startsWith('U17_')) {
+        catSelect.value = 'U17 NATIONAL';
+        clean = clean.replace(/^U17_/, '');
+    } else if (clean.startsWith('R1_')) {
+        catSelect.value = 'RÉGIONAL 1 (R1)';
+        clean = clean.replace(/^R1_/, '');
+    } else if (clean.startsWith('R2_')) {
+        catSelect.value = 'RÉGIONAL 2 (R2)';
+        clean = clean.replace(/^R2_/, '');
+    } else if (clean.startsWith('R3_')) {
+        catSelect.value = 'RÉGIONAL 3 (R3)';
+        clean = clean.replace(/^R3_/, '');
+    } else if (clean.startsWith('D1_') || clean.startsWith('D2_') || clean.startsWith('D3_')) {
+        catSelect.value = 'DÉPARTEMENTAL (D1 / D2 / D3)';
+        clean = clean.replace(/^(D1_|D2_|D3_)/, '');
     }
 
     if (!titleInput.value || titleInput.value.trim() === '') {
@@ -513,10 +561,10 @@ form.onsubmit = (e) => {
 
 // Sync Matches
 document.getElementById('sync-matches-btn').onclick = () => {
-    if (!confirm("Voulez-vous écraser la liste par les 3 derniers albums ?")) return;
+    if (!confirm("Voulez-vous écraser la liste par les 4 derniers albums ?")) return;
 
     const sortedAlbums = [...albums].sort((a, b) => new Date(b.date) - new Date(a.date));
-    const topAlbums = sortedAlbums.slice(0, 3);
+    const topAlbums = sortedAlbums.slice(0, 4);
 
     matches = topAlbums.map((album, idx) => {
         let homeTeam = "DOMICILE";
@@ -529,17 +577,42 @@ document.getElementById('sync-matches-btn').onclick = () => {
             awayTeam = parts[1].trim();
         }
 
+        const removeAccents = str => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        let catNorm = removeAccents((album.category || '').toUpperCase());
         let competitionBadge = "badge-reg";
-        let catUpper = album.category.toUpperCase();
-        if (catUpper.includes("NATIONAL 1") || catUpper === "N1") competitionBadge = "badge-n1";
-        else if (catUpper.includes("NATIONAL 3") || catUpper === "N3") competitionBadge = "badge-n3";
-        else if (catUpper.includes("COUPE")) competitionBadge = "badge-cup";
-        else if (catUpper.includes("U19")) competitionBadge = "badge-u19";
+        let competitionLabel = album.category;
+
+        if (catNorm.includes("PREPA") || catNorm.includes("AMICAL")) {
+            competitionBadge = "badge-prepa";
+            competitionLabel = catNorm.includes("L2") ? "Prépa L2" : "Match Amical";
+        } else if (catNorm.includes("LIGUE 1") || catNorm === "L1") {
+            competitionBadge = "badge-l1";
+            competitionLabel = "Ligue 1";
+        } else if (catNorm.includes("LIGUE 2") || catNorm === "L2") {
+            competitionBadge = "badge-l2";
+            competitionLabel = "Ligue 2";
+        } else if (catNorm.includes("LIGUE 3") || catNorm.includes("NATIONAL 1") || catNorm === "N1" || catNorm === "L3") {
+            competitionBadge = "badge-n1";
+            competitionLabel = catNorm.includes("LIGUE 3") ? "Ligue 3" : "National 1";
+        } else if (catNorm.includes("NATIONAL 2") || catNorm.includes("NATIONAL 3") || catNorm === "N2" || catNorm === "N3") {
+            competitionBadge = "badge-n3";
+            competitionLabel = catNorm.includes("NATIONAL 2") ? "National 2" : "National 3";
+        } else if (catNorm.includes("GAMBARDELLA")) {
+            competitionBadge = "badge-cup";
+            competitionLabel = "Coupe Gambardella";
+        } else if (catNorm.includes("COUPE")) {
+            competitionBadge = "badge-cup";
+            competitionLabel = "Coupe de France";
+        } else if (catNorm.includes("FEMININ") || catNorm.includes("R1F") || catNorm.includes("D1F") || catNorm.includes("D2F") || catNorm.includes("D3F") || catNorm.includes("ARKEMA") || catNorm.includes("SECONDE LIGUE")) {
+            competitionBadge = "badge-fem";
+            competitionLabel = album.category;
+        } else if (catNorm.includes("FORMATION") || catNorm.includes("U19") || catNorm.includes("U17") || catNorm.includes("JEUNE")) {
+            competitionBadge = "badge-formation";
+            competitionLabel = album.category;
+        }
 
         let homeLogo = "";
         let awayLogo = "";
-
-        const removeAccents = str => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
         clubsData.forEach(div => {
             div.clubs.forEach(c => {
@@ -567,7 +640,7 @@ document.getElementById('sync-matches-btn').onclick = () => {
             homeTeam,
             awayTeam,
             date: matchDate,
-            competition: album.category,
+            competition: competitionLabel,
             competitionBadge,
             homeLogo,
             awayLogo,
@@ -576,7 +649,7 @@ document.getElementById('sync-matches-btn').onclick = () => {
     });
 
     renderMatches();
-    alert("Matchs générés avec succès. Vérifiez les logos puis cliquez sur Sauvegarder !");
+    alert("Matchs générés avec succès. Vérifiez les logos puis cliquez sur Sauvegarder ou Déployer !");
 };
 
 // Form Submit (Matches)
@@ -678,7 +751,7 @@ if (importGcalBtn) {
                 });
                 renderAgenda();
                 hideStatus();
-                alert(`${addedCount} nouveaux événements importés avec succès ! Pensez à "Sauvegarder Agenda".`);
+                alert(`${addedCount} nouveaux événements importés avec succès ! Pensez à cliquer sur "Sauvegarder" ou "Déployer".`);
             } else {
                 hideStatus();
                 alert('Erreur lors de l\'importation: ' + (data.error || 'Erreur inconnue'));
@@ -724,9 +797,11 @@ deleteAgendaBtn.onclick = () => {
     }
 };
 
-// Consolidate Save functionality into one button
-saveAllBtn.onclick = async () => {
-    showStatus('Sauvegarde en cours...', 'Veuillez patienter...');
+// Consolidate Save functionality into one reusable function
+async function saveAllData(silent = false) {
+    if (!silent) {
+        showStatus('Sauvegarde en cours...', 'Veuillez patienter...');
+    }
 
     // 1. Prepare Stats Data
     if (statsData) {
@@ -756,7 +831,7 @@ saveAllBtn.onclick = async () => {
             parseInt(document.getElementById('month-may').value) || 0
         ];
         statsData.seasonEvolution.season2026_2027 = [...statsData.seasonEvolution.values];
-        statsData.competitionDistribution.labels = ["Ligue 1", "Ligue 2", "Ligue 3 (ex-N1)", "National 2 (ex-N3)", "Coupe de France", "U19 / Autres"];
+        statsData.competitionDistribution.labels = ["Ligue 1", "Ligue 2", "Ligue 3 (ex-N1)", "National 2 (ex-N3)", "Coupe de France", "Formation / Fém. / Amateur"];
 
         statsData.photoTypes.values = [
             parseInt(document.getElementById('type-action').value) || 0,
@@ -782,7 +857,7 @@ saveAllBtn.onclick = async () => {
         if (total !== 100) {
             hideStatus();
             alert(`❌ Le total des types de photos doit = 100% (actuellement ${total}%)`);
-            return;
+            return false;
         }
     }
 
@@ -825,17 +900,24 @@ saveAllBtn.onclick = async () => {
             })
         ]);
 
-        hideStatus();
-        if (albumsRes.ok && matchesRes.ok && statsRes.ok && affichesRes.ok && agendaRes.ok && instaRes.ok && clubsRes.ok) {
-            alert('Sauvegardé avec succès !');
-        } else {
-            alert('Erreur partielle lors de la sauvegarde.');
+        const allOk = albumsRes.ok && matchesRes.ok && statsRes.ok && affichesRes.ok && agendaRes.ok && instaRes.ok && clubsRes.ok;
+        if (!silent) {
+            hideStatus();
+            if (allOk) {
+                alert('Sauvegardé avec succès !');
+            } else {
+                alert('Erreur partielle lors de la sauvegarde.');
+            }
         }
+        return allOk;
     } catch (err) {
         hideStatus();
-        alert('Erreur réseau: ' + err);
+        alert('Erreur réseau lors de la sauvegarde: ' + err);
+        return false;
     }
-};
+}
+
+saveAllBtn.onclick = () => saveAllData(false);
 
 
 // Optimize Images Button
@@ -877,13 +959,20 @@ document.getElementById('optimize-btn').onclick = async () => {
     }
 };
 
-// Deploy Button
+// Deploy Button (auto-saves all tabs before deploying)
 document.getElementById('deploy-btn').onclick = async () => {
     const message = prompt('Message de commit:', 'Mise à jour portfolio via admin');
 
     if (!message) return;
 
-    showStatus('Déploiement en cours...', 'Git add, commit et push vers GitHub');
+    showStatus('Déploiement en cours...', 'Sauvegarde des données, optimisation et push vers GitHub');
+    addLog('💾 Sauvegarde automatique de tous les onglets...');
+
+    const saved = await saveAllData(true);
+    if (!saved) {
+        return;
+    }
+    addLog('✅ Données sauvegardées.');
 
     try {
         const res = await fetch('/api/deploy', {
@@ -1108,9 +1197,9 @@ window.moveClubDown = (divIndex, cIndex) => {
 };
 
 document.getElementById('restore-backup-btn').onclick = async () => {
-    if (!confirm("ATTENTION : Cela va annuler le dernier déploiement et restaurer les données du précédent push. Êtes-vous absolument sûr ?")) return;
+    if (!confirm("ATTENTION : Cela va annuler vos modifications locales non publiées et restaurer les fichiers du dernier déploiement Git. Êtes-vous sûr ?")) return;
 
-    showStatus('Restauration en cours...', 'Annulation du dernier commit et push...');
+    showStatus('Restauration en cours...', 'Restauration des fichiers locaux...');
     try {
         const res = await fetch('/api/restore-backup', { method: 'POST' });
         const result = await res.json();

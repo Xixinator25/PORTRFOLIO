@@ -2330,6 +2330,22 @@ body.fast-load .hero .btn {
     color: #000;
 }
 
+.bg-l1 {
+    background: linear-gradient(45deg, #0f172a, #1e293b);
+    color: #ffd700;
+    border: 1px solid #ffd700;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+    font-weight: 800;
+}
+
+.badge-l1 {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #ffd700;
+    border: 1px solid #ffd700;
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+    padding: 5px 12px;
+}
+
 .bg-l2 {
     background: linear-gradient(45deg, #003366, #00aaff);
     color: #fff;
@@ -2352,9 +2368,41 @@ body.fast-load .hero .btn {
     padding: 5px 12px;
 }
 
-.bg-u19 {
-    background: var(--primary);
+.bg-u19,
+.bg-formation {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
     color: #fff;
+    font-weight: 700;
+}
+
+.badge-formation {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: #fff;
+    border: 1px solid rgba(138, 180, 248, 0.6);
+    box-shadow: 0 0 12px rgba(106, 17, 203, 0.45);
+    padding: 5px 12px;
+}
+
+.bg-fem {
+    background: linear-gradient(135deg, #b91d73, #f953c6);
+    color: #fff;
+    font-weight: 700;
+}
+
+.badge-fem {
+    background: linear-gradient(135deg, #b91d73, #f953c6);
+    color: #fff;
+    border: 1px solid rgba(255, 150, 220, 0.6);
+    box-shadow: 0 0 12px rgba(249, 83, 198, 0.45);
+    padding: 5px 12px;
+}
+
+.bg-reg,
+.badge-reg {
+    background: linear-gradient(135deg, #1f2937, #374151);
+    color: #fff;
+    border: 1px solid #6b7280;
+    padding: 5px 12px;
 }
 
 .club-bubble-wrapper {

@@ -338,12 +338,19 @@ app.post('/api/deploy', async (req, res) => {
             console.warn('Git pull warning:', pullErr.message);
         }
 
-        // 1.5. Auto-optimize any new images before staging so Vercel always has the WebP versions
+        // 1.5. Auto-optimize any new images and update sitemap.xml before staging
         try {
             const opt = await execPromise('node optimize_images.js', { cwd: __dirname });
             if (opt.stdout) output += opt.stdout + '\n';
         } catch (optErr) {
             console.warn('Optimize warning during deploy:', optErr.message);
+        }
+
+        try {
+            const sm = await execPromise('node generate_sitemap.js', { cwd: __dirname });
+            if (sm.stdout) output += sm.stdout + '\n';
+        } catch (smErr) {
+            console.warn('Sitemap warning during deploy:', smErr.message);
         }
 
         // 2. Git add
