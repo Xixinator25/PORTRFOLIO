@@ -338,6 +338,14 @@ app.post('/api/deploy', async (req, res) => {
             console.warn('Git pull warning:', pullErr.message);
         }
 
+        // 1.5. Auto-optimize any new images before staging so Vercel always has the WebP versions
+        try {
+            const opt = await execPromise('node optimize_images.js', { cwd: __dirname });
+            if (opt.stdout) output += opt.stdout + '\n';
+        } catch (optErr) {
+            console.warn('Optimize warning during deploy:', optErr.message);
+        }
+
         // 2. Git add
         const add = await execPromise('git add .', { cwd: __dirname });
         console.log('Git add:', add.stdout);

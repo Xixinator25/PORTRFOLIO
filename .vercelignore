@@ -1,0 +1,32 @@
+# Fichiers d'administration locale et scripts Node/PowerShell (inutiles sur Vercel)
+node_modules/
+package.json
+package-lock.json
+admin/
+server.js
+optimize_images.js
+generate.js
+generate_sitemap.js
+verify.js
+update.ps1
+restart-server.ps1
+index_backup.html
+WORKFLOW_PHOTOS.md
+
+# Ignorer les photos originales lourdes dans les sous-dossiers d'albums
+# (les originaux sont chargés à 100% de leur qualité depuis le CDN GitHub en plein écran)
+images/*/*.jpg
+images/*/*.JPG
+images/*/*.jpeg
+images/*/*.JPEG
+images/*/*.png
+images/*/*.PNG
+images/*/*.webp
+
+# Garder sur Vercel uniquement les versions optimisées WebP des albums + tous les logos
+!images/*/*_tiny.webp
+!images/*/*_small.webp
+!images/*/*_medium.webp
+!images/*/*_large.webp
+!images/logos/*
+!images/logos/**

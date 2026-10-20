@@ -36,6 +36,18 @@ async function optimizeImages() {
             if (album.images) allImages.push(...album.images);
         });
 
+        // Include Instagram posts images as well
+        if (fs.existsSync('instagram_posts.json')) {
+            try {
+                const instaPosts = JSON.parse(fs.readFileSync('instagram_posts.json', 'utf8'));
+                instaPosts.forEach(post => {
+                    if (post.image) allImages.push(post.image);
+                });
+            } catch (e) {
+                console.warn('⚠️  Could not parse instagram_posts.json:', e.message);
+            }
+        }
+
         // Unique images
         const uniqueImages = [...new Set(allImages)];
         totalImages = uniqueImages.length;
