@@ -10,11 +10,11 @@
     ],
     "values": [
       0,
-      1,
-      15,
+      3,
+      16,
       7,
-      6,
-      13
+      7,
+      15
     ]
   },
   "seasonEvolution": {
@@ -34,8 +34,8 @@
     "season2026_2027": [
       2,
       0,
-      0,
-      0,
+      5,
+      4,
       0,
       0,
       0,
@@ -60,8 +60,8 @@
     "values": [
       2,
       0,
-      0,
-      0,
+      5,
+      4,
       0,
       0,
       0,
@@ -86,12 +86,12 @@
     ]
   },
   "impactNumerique": {
-    "instaFollowers": 874,
+    "instaFollowers": 924,
     "instaLikes": 209,
     "instaReach": 32091,
     "tiktokViews": 69700,
-    "tiktokLikes": 23862,
-    "tiktokRecord": 16500
+    "tiktokLikes": 27028,
+    "tiktokRecord": 16700
   },
   "status": {
     "available": true
