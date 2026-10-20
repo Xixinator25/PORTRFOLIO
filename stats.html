@@ -124,7 +124,7 @@
                 </div>
                 <div class="card-overlay" style="opacity:1; transform:translateY(0);">
                     <span class="card-cat">NÉ EN 2009</span>
-                    <div class="card-title">16 ANS</div>
+                    <div class="card-title" id="kpi-age-title">17 ANS</div>
                     <small class="card-count">Lycéen en Terminale Générale</small>
                 </div>
             </div>
@@ -448,14 +448,29 @@
 
     </div>
 
-    <div class="footer-note">
-        &copy; 2026 Alexis Sartoris. Données mises à jour en Août 2026.
+    <div class="footer-note" id="stats-footer-note">
+        &copy; 2026 Alexis Sartoris. Données mises à jour en Octobre 2026.
     </div>
+
+    <script>
+        (function updateDynamicDates() {
+            const now = new Date();
+            const months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+            const footerNote = document.getElementById('stats-footer-note');
+            if (footerNote) {
+                footerNote.innerHTML = `&copy; ${now.getFullYear()} Alexis Sartoris. Données mises à jour en ${months[now.getMonth()]} ${now.getFullYear()}.`;
+            }
+            const ageTitle = document.getElementById('kpi-age-title');
+            if (ageTitle) {
+                ageTitle.innerText = `${now.getFullYear() - 2009} ANS`;
+            }
+        })();
+    </script>
 
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-    <script src="main.js?v=17"></script>
-    <script src="charts.js?v=16"></script>
+    <script src="main.js?v=18"></script>
+    <script src="charts.js?v=18"></script>
 </body>
 
 </html>

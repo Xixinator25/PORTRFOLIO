@@ -67,10 +67,12 @@ document.addEventListener('DOMContentLoaded', async function () {
                     label: 'Matchs Couverts',
                     data: statsData.competitionDistribution.values,
                     backgroundColor: [
-                        'rgba(233, 69, 96, 0.8)',
-                        'rgba(233, 69, 96, 0.6)',
-                        'rgba(233, 69, 96, 0.4)',
-                        'rgba(233, 69, 96, 0.2)'
+                        'rgba(233, 69, 96, 0.95)',
+                        'rgba(233, 69, 96, 0.80)',
+                        'rgba(233, 69, 96, 0.65)',
+                        'rgba(233, 69, 96, 0.50)',
+                        'rgba(233, 69, 96, 0.35)',
+                        'rgba(233, 69, 96, 0.22)'
                     ],
                     borderColor: primaryColor,
                     borderWidth: 2,

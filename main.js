@@ -639,8 +639,15 @@ function createMatchCard(match) {
         year: 'numeric'
     });
 
-    const isLigue2 = match.competition.toUpperCase().includes('LIGUE 2');
-    const specialBadge = isLigue2 ? `<div class="badge-l2" style="position: absolute; top: 15px; right: 15px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1px;">PRO : LIGUE 2</div>` : '';
+    const compNorm = (match.competition || '').toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    const isPrepa = compNorm.includes('PREPA') || compNorm.includes('AMICAL') || match.competitionBadge === 'badge-prepa';
+    const isLigue2 = compNorm.includes('LIGUE 2') && !isPrepa;
+    let specialBadge = '';
+    if (isLigue2) {
+        specialBadge = `<div class="badge-l2" style="position: absolute; top: 15px; right: 15px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1px;">PRO : LIGUE 2</div>`;
+    } else if (isPrepa) {
+        specialBadge = `<div class="badge-prepa" style="position: absolute; top: 15px; right: 15px; z-index: 10; border-radius: 4px; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1px; padding: 4px 10px;">PRÉPA L2</div>`;
+    }
 
     card.innerHTML = `
         ${specialBadge}
@@ -650,7 +657,7 @@ function createMatchCard(match) {
         </div>
         <div class="match-teams">
             <div class="match-team">
-                <img src="${match.homeLogo}" alt="${match.homeTeam}" class="match-team-logo" onerror="this. style.display='none'">
+                <img src="${match.homeLogo}" alt="${match.homeTeam}" class="match-team-logo" onerror="this.style.display='none'">
                 <span class="match-team-name">${match.homeTeam}</span>
             </div>
             <span class="match-vs">VS</span>
@@ -680,16 +687,20 @@ async function initDynamicStats() {
         const homeOther = document.getElementById('hm-other'); // This one has FCSM - PARIS SG, keeping it or updating?
         
         if (homeL2 && stats.competitionDistribution) {
-            homeL2.innerText = `${stats.competitionDistribution.values[1]} MATCH`;
+            const c = stats.competitionDistribution.values[1] || 0;
+            homeL2.innerText = `${c} ${c > 1 ? 'MATCHS' : 'MATCH'}`;
         }
         if (homeN1 && stats.competitionDistribution) {
-            homeN1.innerText = `${stats.competitionDistribution.values[2]} MATCHS`;
+            const c = stats.competitionDistribution.values[2] || 0;
+            homeN1.innerText = `${c} ${c > 1 ? 'MATCHS' : 'MATCH'}`;
         }
         if (homeN3 && stats.competitionDistribution) {
-            homeN3.innerText = `${stats.competitionDistribution.values[3]} MATCHS`;
+            const c = stats.competitionDistribution.values[3] || 0;
+            homeN3.innerText = `${c} ${c > 1 ? 'MATCHS' : 'MATCH'}`;
         }
         if (homeCup && stats.competitionDistribution) {
-            homeCup.innerText = `${stats.competitionDistribution.values[4]} MATCHS`;
+            const c = stats.competitionDistribution.values[4] || 0;
+            homeCup.innerText = `${c} ${c > 1 ? 'MATCHS' : 'MATCH'}`;
         }
 
         // Contact Section Status
