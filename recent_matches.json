@@ -1,7 +1,18 @@
 {
     "recentMatches": [
         {
-            "id": 1792518059989,
+            "id": 1792855716006,
+            "homeTeam": "FCSM",
+            "awayTeam": "US BOULOGNE",
+            "date": "2026-10-09",
+            "competition": "Ligue 2",
+            "competitionBadge": "badge-l2",
+            "homeLogo": "images/logos/fcsm.png",
+            "awayLogo": "images/logos/Logo_US_Boulogne_CO.png",
+            "albumId": "2026-10-24_fcsm-vs-us-boulogne"
+        },
+        {
+            "id": 1792855716007,
             "homeTeam": "FCSM",
             "awayTeam": "FC NANTES",
             "date": "2026-09-12",
@@ -12,7 +23,7 @@
             "albumId": "2026-10-20_fcsm-vs-fc-nantes"
         },
         {
-            "id": 1792518059990,
+            "id": 1792855716008,
             "homeTeam": "FCSM",
             "awayTeam": "DFCO",
             "date": "2026-07-25",
@@ -21,17 +32,6 @@
             "homeLogo": "images/logos/fcsm.png",
             "awayLogo": "images/logos/dfco.png",
             "albumId": "2026-10-20_fcsm-vs-dfco"
-        },
-        {
-            "id": 1792518059991,
-            "homeTeam": "FCSM",
-            "awayTeam": "FC METZ",
-            "date": "2026-07-22",
-            "competition": "Prépa L2",
-            "competitionBadge": "badge-prepa",
-            "homeLogo": "images/logos/fcsm.png",
-            "awayLogo": "images/logos/fcmetz.png",
-            "albumId": "2026-08-26_fcsm-vs-fc-metz"
         }
     ]
 }
