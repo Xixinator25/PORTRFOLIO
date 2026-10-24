@@ -329,16 +329,7 @@ app.post('/api/deploy', async (req, res) => {
         console.log('Starting deployment...');
         let output = '';
 
-        // 1. Pull / rebase from remote to avoid non-fast-forward push rejection
-        try {
-            const pull = await execPromise('git pull --rebase origin main', { cwd: __dirname });
-            console.log('Git pull:', pull.stdout);
-            output += (pull.stdout || '') + '\n';
-        } catch (pullErr) {
-            console.warn('Git pull warning:', pullErr.message);
-        }
-
-        // 1.5. Auto-optimize any new images and update sitemap.xml before staging
+        // 1. Auto-optimize any new images and update sitemap.xml before staging
         try {
             const opt = await execPromise('node optimize_images.js', { cwd: __dirname });
             if (opt.stdout) output += opt.stdout + '\n';
@@ -368,7 +359,16 @@ app.post('/api/deploy', async (req, res) => {
             output += 'Rien à commiter (arbre de travail propre).\n';
         }
 
-        // 4. Push to main
+        // 4. Pull / merge from remote AFTER local commit so unstaged files never block git pull
+        try {
+            const pull = await execPromise('git pull --no-rebase --no-edit -X ours origin main', { cwd: __dirname });
+            console.log('Git pull:', pull.stdout);
+            output += (pull.stdout || '') + '\n';
+        } catch (pullErr) {
+            console.warn('Git pull warning:', pullErr.message);
+        }
+
+        // 5. Push to main
         const pushMain = await execPromise('git push origin main', { cwd: __dirname });
         console.log('Git push main:', pushMain.stdout || pushMain.stderr);
         output += (pushMain.stdout || pushMain.stderr || '') + '\n';
