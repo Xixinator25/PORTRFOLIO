@@ -21,7 +21,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link rel="stylesheet" href="style.css?v=6">
+    <link rel="stylesheet" href="style.css?v=21">
     <link rel="icon" href="favicon.png" type="image/png">
 
     <style>
@@ -198,12 +198,12 @@
 
 <body>
 
-    <header>
+    <header class="subpage-header">
         <div class="logo"><a href="index.html">shooted.by.<span>alexis</span></a></div>
         <nav>
             <ul>
-                <li><a href="index.html#portfolio">Galerie</a></li>
-                <li><a href="stats.html" style="color:var(--primary);">Data & Stats</a></li>
+                <li><a href="index.html#portfolio" class="nav-active">Galerie</a></li>
+                <li><a href="stats.html">Data & Stats</a></li>
                 <li><a href="about.html">À Propos</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
             </ul>
@@ -215,6 +215,7 @@
         <div id="lb-prev" class="lb-nav-btn"><i class="fa-solid fa-chevron-left"></i></div>
         <div id="lb-next" class="lb-nav-btn"><i class="fa-solid fa-chevron-right"></i></div>
         <img id="lightbox-img" src="" alt="Zoom">
+        <div id="lb-counter" class="lb-counter"></div>
     </div>
 
     <!-- Cursor Glow -->
@@ -228,6 +229,10 @@
 
     <section class="match-gallery">
         <div id="gallery-grid" class="mg-grid"></div>
+        <div class="album-bottom-nav">
+            <a href="index.html#portfolio" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Retour aux Albums</a>
+            <button type="button" class="btn btn-outline" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"><i class="fa-solid fa-arrow-up"></i> Haut de page</button>
+        </div>
     </section>
 
     <footer>
@@ -345,7 +350,7 @@
                 
                 const returnBtn = document.createElement('div');
                 returnBtn.style.marginTop = '1rem';
-                returnBtn.innerHTML = '<a href="index.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Retour Accueil</a>';
+                returnBtn.innerHTML = '<a href="index.html#portfolio" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Retour aux Albums</a>';
                 document.getElementById('album-content').appendChild(returnBtn);
 
                 // Render Images
@@ -454,14 +459,20 @@
         // --- LIGHTBOX LOGIC ---
         const lightbox = document.getElementById('lightbox');
         const lbImg = document.getElementById('lightbox-img');
+        const lbCounter = document.getElementById('lb-counter');
         let currentImages = [];
         let currentIndex = 0;
+        let lbScale = 1;
+        let touchStartX = 0;
+        let touchEndX = 0;
 
         function openLightbox(index, images) {
             currentImages = images;
             currentIndex = index;
             updateLightbox();
             lightbox.classList.add('open');
+            lbScale = 1;
+            lbImg.style.transform = 'scale(1)';
             document.body.style.overflow = 'hidden';
         }
 
@@ -475,6 +486,11 @@
                 }
             };
             lbImg.src = getOriginalImageUrl(rawSrc);
+            if (lbCounter) {
+                lbCounter.innerText = `${currentIndex + 1} / ${currentImages.length}`;
+            }
+            lbScale = 1;
+            lbImg.style.transform = 'scale(1)';
         }
 
         document.getElementById('lightbox-close').onclick = closeLightbox;
@@ -483,10 +499,51 @@
             document.body.style.overflow = '';
         }
 
-        document.getElementById('lb-next').onclick = (e) => { e.stopPropagation(); currentIndex = (currentIndex + 1) % currentImages.length; updateLightbox(); };
-        document.getElementById('lb-prev').onclick = (e) => { e.stopPropagation(); currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length; updateLightbox(); };
+        function nextLbImage(e) {
+            if (e) e.stopPropagation();
+            if (!currentImages.length) return;
+            currentIndex = (currentIndex + 1) % currentImages.length;
+            updateLightbox();
+        }
+
+        function prevLbImage(e) {
+            if (e) e.stopPropagation();
+            if (!currentImages.length) return;
+            currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+            updateLightbox();
+        }
+
+        document.getElementById('lb-next').onclick = nextLbImage;
+        document.getElementById('lb-prev').onclick = prevLbImage;
+
+        lbImg.onclick = (e) => {
+            e.stopPropagation();
+            lbScale = lbScale === 1 ? 2 : 1;
+            lbImg.style.transition = 'transform 0.3s ease';
+            lbImg.style.transform = `scale(${lbScale})`;
+            lbImg.style.cursor = lbScale === 1 ? 'zoom-in' : 'zoom-out';
+        };
+
+        lightbox.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        lightbox.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (lbScale > 1) return;
+            const threshold = 50;
+            if (touchEndX < touchStartX - threshold) nextLbImage();
+            if (touchEndX > touchStartX + threshold) prevLbImage();
+        }, { passive: true });
 
         lightbox.onclick = (e) => { if (e.target === lightbox) closeLightbox(); };
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') nextLbImage();
+            if (e.key === 'ArrowLeft') prevLbImage();
+        });
 
     </script>
 </body>
